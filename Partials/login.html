@@ -1,0 +1,27 @@
+<!-- this module is used with the login.js file -->
+
+<div id="login-page">
+	<div class="wrapper">
+		<div class="login-container">
+			<span class="logo-login"><i class="fa fa-picture-o"></i></span>
+			<h1 class="heading">Clocker</h1>
+			<form class="form">
+				<input id="user-email" ng-model="email" type="text" placeholder="Email">
+				<input id="user-password" ng-model="password" type="password" placeholder="Password">
+				<button id="login-button" ng-click="login()">Login</button>
+			</form>
+
+			<div>
+				<h5>New to Clocker? Click <a href="">here</a> to get started in 5 seconds!</h5>
+			</div>
+			
+			<!-- ALERT BOX -->
+			<div id="alert" class="alert" role="alert">
+				<p ng-if="message">Message: <strong>{{ message }}</strong></p>
+  			<p ng-if="error">Error: <strong>{{ error }}</strong></p>
+     				<h4 id="alert-title">You are not logged in</h4>
+    				<p id="alert-detail"></p>
+			</div>
+		</div>
+	</div>
+</div>
