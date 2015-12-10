@@ -21,4 +21,48 @@
 					<option>HCA Impact Day</option>
 			</select>
 		</div>
-		<button>Sign In</button>
+		<button ng-click="findVisitor()">Sign In</button>
+
+<!-- located visitor modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="foundMatchModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            <div ng-repeat="name in match">
+					      <div>
+					      	<h4>Are you {{name.firstName}} {{name.lastName}}?</h4>
+					      </div>
+					    
+					    </div>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Yes - Sign me in!</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+   <!-- No match found modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="noMatchModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            <div ng-repeat="name in match">
+					      <div>
+					      	<h4>Are you {{name.firstName}} {{name.lastName}}?</h4>
+					      </div>
+					    
+					    </div>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Yes - Sign me in!</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
