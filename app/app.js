@@ -11,5 +11,9 @@ app.config(['$routeProvider',
     	templateUrl: 'Partials/adminSignUp.html',
     	controller: 'adminSignUp'
     })
+    .when('/clocker/visitorsignin', {
+    	templateUrl: 'Partials/visitorSignIn.html',
+    	controller: 'visitorSignIn'
+    })
     .otherwise('/clocker/login');
   }]);

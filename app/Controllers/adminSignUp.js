@@ -1,5 +1,5 @@
-app.controller('adminSignUp', ["$scope", "Auth", "$location", "$firebaseAuth",
-  function($scope, Auth, $location, $firebaseAuth) {
+app.controller('adminSignUp', ["$scope", "Auth", "$location", "$firebaseAuth", "getAuthData",
+  function($scope, Auth, $location, $firebaseAuth, getAuthData) {
   	console.log("I see admin Sing Up!!");
 
   	$scope.createNewUser = function() {
@@ -14,6 +14,7 @@ app.controller('adminSignUp', ["$scope", "Auth", "$location", "$firebaseAuth",
         $scope.message = "User created with uid: " + authData.uid;
         var newfbRef = new Firebase("https://clocker.firebaseio.com/" + uid +"/users/");
 		    var userData = {
+		    	"org": $scope.orgName,
 		    	"userId": uid,
 		    	"firstName": $scope.firstName,
 		    	"lastName": $scope.lastName,
@@ -22,7 +23,7 @@ app.controller('adminSignUp', ["$scope", "Auth", "$location", "$firebaseAuth",
 		    };
 		    /// sets the new user data object to the firebase database ///
 		    newfbRef.push(userData);
-		    //$scope.login();
+		    $scope.login();
       }).catch(function(error) {
         $scope.error = error;
       });
@@ -39,9 +40,12 @@ app.controller('adminSignUp', ["$scope", "Auth", "$location", "$firebaseAuth",
 		  	if (error) {
 		    	console.log("Login Failed!", error);
 		  	} else {
-          $location.path("/clocker/main/");
-          $scope.$apply();
-		    	console.log("Logged user in with payload:", authData);
+          	console.log("authData.uid:", authData.uid);
+		    var adminUid = authData.uid;
+		    getAuthData.setAdminUid(adminUid);	
+        $location.path("/clocker/visitorsignin/");
+        $scope.$apply();
+
           
 		  	}
 			});
