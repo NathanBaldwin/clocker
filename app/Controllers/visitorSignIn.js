@@ -2,15 +2,20 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
   function($scope, Auth, $location, $firebaseArray, getAuthData) {
   	console.log("I see admin visitor sign in controller!");
 
+  	var ref = new Firebase("https://clocker.firebaseio.com/");
+		var currentAuthData = ref.getAuth();
+		var adminUid = currentAuthData.uid;
+		console.log("adminUid", adminUid);
 
-
-  	var adminUid = getAuthData.getAdminUid();
-  	console.log("adminUid", adminUid);
-
+		if (currentAuthData) {
+  		console.log("Authenticated user with uid:", currentAuthData.uid);
+		}
 
   	var pastVisitorsRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/visitors")
 
   	$scope.pastVisitorsArray = $firebaseArray(pastVisitorsRef);
+
+  	$scope.match = [];
 
   	$scope.findVisitor = function() {
 			$scope.pastVisitorsArray.$loaded().then(function(pastVisitorsArray) {
@@ -45,6 +50,30 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
   
     /// sets the new visitor data object to the firebase database ///
     newfbRef.push(userData)
+  
+  };
+
+  $scope.createNewActivity = function() {
+		console.log("you clicked on create 'create new Activity'!");
+		console.log("adminUid", adminUid);
+	
+		var newfbRef = new Firebase("https://clocker.firebaseio.com/" + adminUid +"/activityLog/");
+    var firstMatch = $scope.match[0];
+    console.log("firstMatch", firstMatch);
+
+    var newActivity = {
+    	"firstName": firstMatch.firstName,
+    	"lastName": firstMatch.lastName,
+    	"email": firstMatch.email,
+    	"visitorId": firstMatch.$id,
+    	"group": $scope.group,
+    	"activity": $scope.activity
+    }
+
+    console.log("newActivity", newActivity);
+  
+    / sets new activity data object to the firebase database ///
+    newfbRef.push(newActivity);
   
   };
 
