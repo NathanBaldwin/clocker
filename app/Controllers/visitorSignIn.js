@@ -11,7 +11,6 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
   	var pastVisitorsRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/visitors")
 
   	$scope.pastVisitorsArray = $firebaseArray(pastVisitorsRef);
-  	$scope.email = "";
 
   	$scope.findVisitor = function() {
 			$scope.pastVisitorsArray.$loaded().then(function(pastVisitorsArray) {
@@ -25,39 +24,28 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
 				});
 			console.log("matching visitor object(s):", $scope.match);
 
-
-
 			if ($scope.match.length < 1) {
-				alert("no match found");
+				$("#noMatchModal").modal("show");
 			} else {
 				$("#foundMatchModal").modal("show");
 			};
-
-
 		})
-
 	}
 
-			// var fullName = "";
-
-			// var pastVisNames = pastVisitorArray.map(function(visitorObject) {
-			// 	var firstName = visitorObject.firstName;
-			// 	var lastName = visitorObject.lastName;
-			// 	fullName = firstName + " " + lastName;
-
-			// 	return fullName;
-			// });
-			// console.log("pastVisNames", pastVisNames);
-			// var match = pastVisNames.filter(function() {
-			// 	return 
-			// })
-
-			// if (pastVisNames) {
-			// 	$("#foundMatchModal").modal("show");
-
-
-			// } else {
-			// 	alert("no match found");
-			// }; 	
+	$scope.createNewVisitor = function() {
+		console.log("you clicked on create 'create new visitor'!");
+		console.log("adminUid", adminUid);
+	
+		var newfbRef = new Firebase("https://clocker.firebaseio.com/" + adminUid +"/visitors/");
+    var userData = {
+    	"firstName": $scope.firstName,
+    	"lastName": $scope.lastName,
+    	"email": $scope.email
+    }
   
+    /// sets the new visitor data object to the firebase database ///
+    newfbRef.push(userData)
+  
+  };
+
 }]);

@@ -51,17 +51,21 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	            <div ng-repeat="name in match">
-					      <div>
-					      	<h4>Are you {{name.firstName}} {{name.lastName}}?</h4>
-					      </div>
+	            
+				      <div>
+				      	<h4>Please enter your name:</h4>
+				      	<div>
+									<input type="text" placeholder="first name" size="50" ng-model="firstName">
+								</div>
+								<div>
+									<input type="text" placeholder="last name" size="50" ng-model="lastName">
+								</div>
+				      </div>
 					    
-					    </div>
-            
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Yes - Sign me in!</button>
+            <button type="button" class="btn btn-primary" ng-click="createNewVisitor()">Sign me in!</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
