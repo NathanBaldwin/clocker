@@ -9,6 +9,54 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 	var activityLogRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/activityLog");
 	console.log("adminUid", adminUid);
 
+	//Start-date Picker functionality:
+
+	var startDate = "";
+
+	var convertDate = function(oldFormat) {
+
+		return $.datepicker.formatDate("yy-mm-dd", oldFormat).toString();
+
+	};
+
+	$(function() {
+			$("#start-date-picker").datepicker({
+				changeMonth: true,
+				changeYear: true,
+				dateFormat: "D, M dd, yy",
+				onSelect: function(dateText, selectedDateObj) {
+					startDate = $("#start-date-picker").datepicker( "getDate" );
+					console.log("startDate", startDate);
+					console.log("converted Date:", convertDate(startDate));
+					var convertedDate = convertDate(startDate);
+					var timeTest = moment(convertedDate).isAfter("2015-12-14T12:17:10-06:00");
+
+					console.log("before/after test:", timeTest);
+
+					console.log("dateText", dateText);
+					console.log("selectedDateObj", selectedDateObj);
+					
+				}
+			});
+		});
+
+	//"before" date Picker functionality:
+	$(function() {
+			$("#before-date-picker").datepicker({
+				dateFormat: "D, M dd, yy",
+				onSelect: function(dateText, selectedDateObj) {
+					console.log("dateText", dateText);
+					console.log("selectedDateObj", selectedDateObj);
+					// var date = $.datepicker.parseDate(inst.settings.dateFormat || $.datepicker._defaults.dateFormat, dateText, inst.settings);
+					// var dateText1 = $.datepicker.formatDate("D, d M yy", date, inst.settings);
+					// date.setDate(date.getDate() + 7);
+					// var dateText2 = $.datepicker.formatDate("D, d M yy", date, inst.settings);
+					// $("#dateoutput").html("Chosen date is <b>" + dateText1 + "</b>; chosen date + 7 days yields <b>" + dateText2 + "</b>");
+				}
+			});
+		});
+
+
 	$scope.activityLogArray = $firebaseArray(activityLogRef);
 
 	//total visitors/people:
