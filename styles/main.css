@@ -79,4 +79,10 @@ form button {
 form button:hover {
   background-color: #4E5F6D; }
 
+.live-log-title {
+  display: inline; }
+
+.backend-link {
+  float: right; }
+
 /*# sourceMappingURL=main.css.map */

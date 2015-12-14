@@ -1,5 +1,5 @@
-app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray", "getAuthData",
-  function($scope, Auth, $location, $firebaseArray, getAuthData) {
+app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray", "getAuthData", "$firebaseObject",
+  function($scope, Auth, $location, $firebaseArray, getAuthData, $firebaseObject) {
   	console.log("I see admin visitor sign in controller!");
 
   	//*****************VISITOR SIGN IN FORM FUNCTIONALITY*************
@@ -74,7 +74,8 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
     	"visitorId": newVisitorId,
     	"group": $scope.group,
     	"activity": $scope.activity,
-    	"in": moment().format('MMMM Do YYYY, h:mm:ss a'),
+    	"inFormatted": moment().format('MMMM Do YYYY, h:mm:ss a'),
+    	"in": moment().format(),
     	"signedIn": true
     }
 
@@ -104,7 +105,8 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
     	"visitorId": firstMatch.$id,
     	"group": $scope.group,
     	"activity": $scope.activity,
-    	"in": moment().format('MMMM Do YYYY, h:mm:ss a'),
+    	"inFormatted": moment().format('MMMM Do YYYY, h:mm:ss a'),
+    	"in": moment().format(),
     	"signedIn": true
     }
 
@@ -133,12 +135,50 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
 
 		var eventKey = event.target.id;
 
-		var fbActivityRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/activityLog/" + eventKey)
+		var fbActivityRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/activityLog/" + eventKey);
 
-		fbActivityRef.update({
-			signedIn: false,
-			out: moment().format('MMMM Do YYYY, h:mm:ss a')
+		var activityObj = $firebaseObject(fbActivityRef);
+
+		activityObj.$loaded().then(function(activityData) {
+			console.log("activityData", activityData);
+
+			console.log("activityData.in", activityData.in);
+
+			activityObj.signedIn = false;
+			activityObj.outFormatted = moment().format('MMMM Do YYYY, h:mm:ss a');
+			activityObj.out = moment().format();
+
+			activityObj.$save().then(function(updatedObjectRef) {
+				updatedObjectRef.on('value', function(updatedObject) {
+					var signedOutActObj = updatedObject.val();
+					console.log("signedOutActObj", signedOutActObj);
+
+					var timeIn = signedOutActObj.in.toString();
+					var timeOut = signedOutActObj.out.toString();
+					console.log("time in:", timeIn, "timeOut:", timeOut);
+
+					var duration = moment(timeIn).twix(timeOut);
+					var durationMins = duration.count('minutes');
+					var durationSecs = duration.count('seconds');
+					console.log("durationMins", durationMins);
+					console.log("durationSecs", durationSecs);
+
+					activityObj.totalMins = durationMins;
+					activityObj.totalSecs = durationSecs;
+
+					activityObj.$save();
+
+
+				})
+			})
+
+			// fbActivityRef.update({
+			// 	signedIn: false,
+			// 	out: moment().format('MMMM Do YYYY, h:mm:ss a')
+			// })
 		})
+
+
 
 	}
 

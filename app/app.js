@@ -15,5 +15,9 @@ app.config(['$routeProvider',
     	templateUrl: 'Partials/visitorSignIn.html',
     	controller: 'visitorSignIn'
     })
+    .when('/clocker/backend/activity', {
+      templateUrl: 'Partials/backend-activity.html',
+      controller: 'backend-activity'
+    })
     .otherwise('/clocker/login');
   }]);

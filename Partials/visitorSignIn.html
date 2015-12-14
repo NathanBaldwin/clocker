@@ -29,7 +29,8 @@
 			<!-- visitor sign in form end -->
 			<div class="col-sm-7">
 				<div>
-					<h1>visitor log</h1>
+					<h1 class="live-log-title">visitor log</h1>
+					<a href="#/clocker/backend/activity/" class="btn btn-default btn-xs backend-link">Analyze Data</a>
 				</div>
 
 				<table class="table table-striped table-hover table-responsive table-bordered">
@@ -42,7 +43,7 @@
 					</tr>
 					<tr ng-repeat="visitor in currentVisitorsArray | filter: visitor.signedIn = true">
 						<td>{{visitor.firstName}} {{visitor.lastName}}</td>
-						<td>{{visitor.in}}</td>
+						<td>{{visitor.inFormatted}}</td>
 						<td>{{visitor.activity}}</td>
 						<td>{{visitor.group}}</td>
 						<td><button id="{{visitor.$id}}" ng-click="signOut()">Sign Out</button></td>
