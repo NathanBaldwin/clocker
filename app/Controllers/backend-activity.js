@@ -1,24 +1,36 @@
 	app.filter('afterDateFilter', function(){
 	  return function(input, timeIn){
+	  	console.log("afterDate input", input);
 	    var out = [];
 	    angular.forEach(input, function(activity){
 	      if(moment(activity.in).isAfter(timeIn)){
 	        out.push(activity)
 	      }
 	    })
+	    console.log("afterDate out:", out);
 	    return out;
 	  }
 	})
 
 	app.filter('beforeDateFilter', function(){
 	  return function(input, timeIn){
+	  	console.log("beforeDate input", input);
 	    var out = [];
 	    angular.forEach(input, function(activity){
 	      if(moment(activity.in).isBefore(timeIn)){
 	        out.push(activity)
 	      }
 	    })
+	  	console.log("beforeDate out:", out);
 	    return out;
+	  }
+	})
+
+	app.filter('resultsCatcher', function(){
+	  return function(input){
+	  	console.log("resultsCatcher input", input);
+	    
+	    return input;
 	  }
 	})
 
@@ -42,6 +54,8 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 		return $.datepicker.formatDate("yy-mm-dd", oldFormat).toString();
 
 	};
+
+	//$scope.filteredResults = [];
 
 	$(function() {
 			$("#start-date-picker").datepicker({

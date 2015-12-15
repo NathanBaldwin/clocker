@@ -74,7 +74,7 @@
 						<th>Group</th>
 						
 					</tr>
-					<tr ng-repeat="activity in activityLogArray | afterDateFilter: selectedStart | beforeDateFilter: selectedEnd | filterBy: ['firstName', 'lastName']: searchName | filterBy: ['group']: group | filterBy: ['activity']: event">
+					<tr ng-repeat="activity in activityLogArray | afterDateFilter: selectedStart | beforeDateFilter: selectedEnd | filterBy: ['firstName', 'lastName']: searchName | filterBy: ['group']: group | filterBy: ['activity']: event | resultsCatcher">
 						<td>{{activity.firstName}} {{activity.lastName}}</td>
 						<td>{{activity.inFormatted}}</td>
 						<td>{{activity.outFormatted}}</td>
