@@ -19,11 +19,30 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-12">
+			<div class="col-sm-2">
 				<input type="text" placeholder="Search Name" ng-model="searchName">
-				
 			</div>
-		</div>
+				<div class="col-sm-5"> Group:
+					<label for="group-select">
+						<select class="form-control" ng-model="group">
+						  <option>Vanderbilt</option>
+						  <option>Belmont</option>
+						  <option>USN</option>
+						  <option>Covenant Presbyterian Church</option>
+						</select>
+					</label>
+				</div>
+				<div class="col-sm-5"> Event/Activity:
+					<label for="event-selece">
+						<select class="form-control" ng-model="event">
+						  <option>Literacy Tutoring</option>
+						  <option>Board meeting</option>
+						  <option>Admin Work</option>
+						  <option>HCA Impact Day</option>
+						</select>
+					</label>
+				</div>
+			</div>
 		<div class="row">
 			<div class="col-sm-3">
 				<h4>Total People:</h4>
@@ -55,7 +74,7 @@
 						<th>Group</th>
 						
 					</tr>
-					<tr ng-repeat="activity in activityLogArray | afterDateFilter: selectedStart | beforeDateFilter: selectedEnd | filterBy: ['firstName', 'lastName']: searchName">
+					<tr ng-repeat="activity in activityLogArray | afterDateFilter: selectedStart | beforeDateFilter: selectedEnd | filterBy: ['firstName', 'lastName']: searchName | filterBy: ['group']: group | filterBy: ['activity']: event">
 						<td>{{activity.firstName}} {{activity.lastName}}</td>
 						<td>{{activity.inFormatted}}</td>
 						<td>{{activity.outFormatted}}</td>
