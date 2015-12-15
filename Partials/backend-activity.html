@@ -12,11 +12,16 @@
 				<input id="start-date-picker" type="text">
 				<p id="dateoutput"></p>
 			</div>
-			<div class="row">
 			<div class="col-sm-6">
 				<label for="before-date">Before:</label>
 				<input id="before-date-picker" type="text">
 				<p id="dateoutput"></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<input type="text" placeholder="Search Name" ng-model="searchName">
+				
 			</div>
 		</div>
 		<div class="row">
@@ -50,7 +55,7 @@
 						<th>Group</th>
 						
 					</tr>
-					<tr ng-repeat="activity in activityLogArray">
+					<tr ng-repeat="activity in activityLogArray | afterDateFilter: selectedStart | beforeDateFilter: selectedEnd | filterBy: ['firstName', 'lastName']: searchName">
 						<td>{{activity.firstName}} {{activity.lastName}}</td>
 						<td>{{activity.inFormatted}}</td>
 						<td>{{activity.outFormatted}}</td>

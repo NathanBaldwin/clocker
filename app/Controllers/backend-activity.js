@@ -1,3 +1,27 @@
+	app.filter('afterDateFilter', function(){
+	  return function(input, timeIn){
+	    var out = [];
+	    angular.forEach(input, function(activity){
+	      if(moment(activity.in).isAfter(timeIn)){
+	        out.push(activity)
+	      }
+	    })
+	    return out;
+	  }
+	})
+
+	app.filter('beforeDateFilter', function(){
+	  return function(input, timeIn){
+	    var out = [];
+	    angular.forEach(input, function(activity){
+	      if(moment(activity.in).isBefore(timeIn)){
+	        out.push(activity)
+	      }
+	    })
+	    return out;
+	  }
+	})
+
 app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArray", "getAuthData", "$firebaseObject",
   function($scope, Auth, $location, $firebaseArray, getAuthData, $firebaseObject) {
   	console.log("I see backend-activity controller!");
@@ -29,13 +53,14 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 					console.log("startDate", startDate);
 					console.log("converted Date:", convertDate(startDate));
 					var convertedDate = convertDate(startDate);
+					$scope.selectedStart = convertDate(startDate);
+					$scope.$apply();
 					var timeTest = moment(convertedDate).isAfter("2015-12-14T12:17:10-06:00");
 
 					console.log("before/after test:", timeTest);
 
 					console.log("dateText", dateText);
 					console.log("selectedDateObj", selectedDateObj);
-					
 				}
 			});
 		});
@@ -43,15 +68,22 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 	//"before" date Picker functionality:
 	$(function() {
 			$("#before-date-picker").datepicker({
+				changeMonth: true,
+				changeYear: true,
 				dateFormat: "D, M dd, yy",
 				onSelect: function(dateText, selectedDateObj) {
+					beforeDate = $("#before-date-picker").datepicker( "getDate" );
+					console.log("before date:", beforeDate);
+					console.log("converted before Date:", convertDate(beforeDate));
+					var convertedDate = convertDate(beforeDate);
+					$scope.selectedEnd = convertDate(beforeDate);
+					$scope.$apply();
+					var timeTest = moment(convertedDate).isBefore("2015-12-14T12:17:10-06:00");
+
+					console.log("before or after test:", timeTest);
+
 					console.log("dateText", dateText);
-					console.log("selectedDateObj", selectedDateObj);
-					// var date = $.datepicker.parseDate(inst.settings.dateFormat || $.datepicker._defaults.dateFormat, dateText, inst.settings);
-					// var dateText1 = $.datepicker.formatDate("D, d M yy", date, inst.settings);
-					// date.setDate(date.getDate() + 7);
-					// var dateText2 = $.datepicker.formatDate("D, d M yy", date, inst.settings);
-					// $("#dateoutput").html("Chosen date is <b>" + dateText1 + "</b>; chosen date + 7 days yields <b>" + dateText2 + "</b>");
+					console.log("selectedDateObj", selectedDateObj);		
 				}
 			});
 		});
