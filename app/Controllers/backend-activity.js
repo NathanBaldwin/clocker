@@ -31,7 +31,7 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 	$scope.filteredSum = 0;
 
 	$scope.$watch(function() {
-  	console.log("new filteredResults", $scope.filteredResults);
+  	//console.log("new filteredResults", $scope.filteredResults);
   	var sum = 0;
 
   	//total hours calc:
@@ -136,6 +136,36 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 				}
 			});
 		});
+
+	$scope.compareActivities = function(currentActivity) {
+		console.log("currentActivity", currentActivity);
+		console.log("$scope.filteredResults", $scope.filteredResults);
+
+		var currentIndex = $scope.filteredResults.indexOf(currentActivity);
+		console.log("currentIndex", currentIndex);
+		// console.log("$scope.filteredResults[currentIndex + 1]", $scope.filteredResults[currentIndex + 1]);
+
+		var prevActivity = $scope.filteredResults[currentIndex - 1]
+
+		if (prevActivity === undefined) {
+			return true
+		};
+
+		var currentMoment = moment(currentActivity.in);
+		console.log("currentMoment", currentMoment);
+
+		var nextActMoment = moment(prevActivity.in)
+		console.log("nextActMoment", nextActMoment);
+
+		if (currentMoment.isSame(nextActMoment, 'd')) {
+			console.log("SAME day");
+			return false;
+		} else {
+			console.log("++++++++PREVIOUS DAY++++++++++");
+			return true;
+		};
+
+	}
 
 
 	

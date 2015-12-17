@@ -72,24 +72,22 @@
 						<th>Time Out</th>
 						<th>Event</th>
 						<th>Group</th>
-						
 					</tr>
-					<tr ng-repeat="activity in filteredResults = (allActivitiesArray | afterDateFilter: selectedStart | beforeDateFilter: selectedEnd | filterBy: ['firstName + lastName']: searchName | filterBy: ['group']: group | filterBy: ['activity']: event)">
-					<div ng-if"{{activity.activity = "Board Meeting"}}">
-						<p>Test if statement</p>
-					</div>
+					<tr ng-repeat-start="activity in filteredResults = (allActivitiesArray | afterDateFilter: selectedStart | beforeDateFilter: selectedEnd | filterBy: ['firstName + lastName']: searchName | filterBy: ['group']: group | filterBy: ['activity']: event)" ng-if="compareActivities(activity)">
+						
+						<td colspan="5">{{activity.inFormatted}}</td>
+
+					</tr>
+					<tr ng-repeat-end="" >
 						<td>{{activity.firstName}} {{activity.lastName}}</td>
 						<td>{{activity.inFormatted}}</td>
 						<td>{{activity.outFormatted}}</td>
 						<td>{{activity.activity}}</td>
 						<td>{{activity.group}}</td>	
-					</tr>
-
-					<!-- <p>length of results: {{testOutput}}</p> -->
-					<!-- <p>length of results: {{filteredResults.length * 10}}</p> -->
-					<!-- <div hours activities="searchName"></div> -->
-
+        	</tr>
 				</table>
+
+
 				
 			</div>
 		</div>
