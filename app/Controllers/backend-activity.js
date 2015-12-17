@@ -1,39 +1,3 @@
-	// app.filter('afterDateFilter', function(){
-	//   return function(input, timeIn){
-	//   	console.log("afterDate input", input);
-	//     var out = [];
-	//     angular.forEach(input, function(activity){
-	//       if(moment(activity.in).isAfter(timeIn)){
-	//         out.push(activity)
-	//       }
-	//     })
-	//     console.log("afterDate out:", out);
-	//     return out;
-	//   }
-	// })
-
-	// app.filter('beforeDateFilter', function(){
-	//   return function(input, timeIn){
-	//   	console.log("beforeDate input", input);
-	//     var out = [];
-	//     angular.forEach(input, function(activity){
-	//       if(moment(activity.in).isBefore(timeIn)){
-	//         out.push(activity)
-	//       }
-	//     })
-	//   	console.log("beforeDate out:", out);
-	//     return out;
-	//   }
-	// })
-
-	// app.filter('resultsCatcher', function(){
-	//   return function(input){
-	//   	console.log("resultsCatcher input", input);
-	    
-	//     return input;
-	//   }
-	// })
-
 app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArray", "getAuthData", "$firebaseObject",
   function($scope, Auth, $location, $firebaseArray, getAuthData, $firebaseObject) {
   	console.log("I see backend-activity controller!");
@@ -45,6 +9,8 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 	var activityLogRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/activityLog");
 	console.log("adminUid", adminUid);
 
+	$scope.activityLogArray = $firebaseArray(activityLogRef);
+	
 	//Start-date Picker functionality:
 
 	var startDate = "";
@@ -55,8 +21,6 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 
 	};
 
-	//$scope.filteredResults = getAuthData.getFilteredResults();
-	//$scope.filteredResults = resultsCatcher;
 
 	$scope.filteredResults = [];
 	$scope.filteredSum = 0;
@@ -66,13 +30,22 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
   	var sum = 0;
 
   	//total hours calc:
+
+  	// var filteredSecsArray = _.pull($scope.filteredResults.totalSecs, undefined);
+  	// console.log("filteredSecsArray", filteredSecsArray);
+
   	$scope.filteredResults.forEach(function (r) {
-		sum += r.totalSecs;
+	  	if (r.totalSecs === undefined) {
+	  	} else {
+			sum += r.totalSecs;
+			}
+
 		});
 
 		$scope.filteredSum = Number(Math.round((sum / 3600)+'e2') +'e-2')
 
 		console.log("$$scope.filteredSum", $scope.filteredSum);
+
 
 		//total events calc:
 		var allEvents = $scope.filteredResults.map(function(activity) {
@@ -98,25 +71,21 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 
 		//total people calc:
 
-		
+		var allPeople = $scope.filteredResults.map(function(activity) {
+
+			var firstName = activity.firstName;
+			var lastName = activity.lastName;
+			var fullName = firstName + " " + lastName;
+
+			return fullName;
+		})
+
+		var uniquePeople = _.uniq(allPeople);
+		console.log("uniquePeople", uniquePeople);
+		$scope.peopleTotal = uniquePeople.length;
 
 	})
 
-
-
-	// $scope.showFilteredSummary = function () {
-	// 	var sum = 0;
-
-	// 	$scope.filteredResults.forEach(function (r) {
-	// 		sum += r.totalSecs;
-	// 		console.log("r",r.totalSecs);
-	// 	});
-
-	// 	$scope.filteredSum = sum;
-	// 	console.log("$scope.filteredSum",$scope.filteredSum);
-
-	// 	return sum;
-	// }
 
 	$(function() {
 			$("#start-date-picker").datepicker({
@@ -164,90 +133,7 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 		});
 
 
-	$scope.activityLogArray = $firebaseArray(activityLogRef);
-
-	//total visitors/people:
-
-	var visitorsArray = $firebaseArray(pastVisitorsRef);
-
-	visitorsArray.$loaded().then(function(returnedVisitorsArray) {
-		console.log("Visitors Array: ", returnedVisitorsArray);
-		$scope.visitorsSum = returnedVisitorsArray.length;
-		console.log("$scope.visitorsSum", $scope.visitorsSum);
-
-	})
-
-	//total hours:
-
 	
-	// $scope.$watch(function () {
- //    $scope.filteredArray = $scope.$eval("activityLogArray | afterDateFilter: selectedStart | beforeDateFilter: selectedEnd | filterBy: ['firstName', 'lastName']: searchName | filterBy: ['group']: group | filterBy: ['activity']: event");
-	// });
-
-	// var testResults = $scope.filteredResults;
-
-	// $scope.$watch('testResults', function() {
-	// 	console.log("test results changed!!");
-	// })
-
-
-
-	$scope.activityLogArray.$loaded().then(function(returnedActivityArray) {
-		console.log("returnedActivityArray", returnedActivityArray);
-
-		var secondsArray = returnedActivityArray.map(function(activity) {
-			return activity.totalSecs;
-		})
-
-		console.log("secondsArray", secondsArray);
-
-		var filteredArray = _.pull(secondsArray, undefined);
-		console.log("filteredArray", filteredArray);
-
-		var secondsSum = filteredArray.reduce(function(prevVal, currentVal) {
-			return prevVal + currentVal;
-		})
-
-		console.log("secondsSum", secondsSum);
-
-		$scope.totalHours = Number(Math.round((secondsSum / 3600)+'e2') +'e-2'); 
-		console.log("$scope.totalHours", $scope.totalHours);
-	})
-
-	//total Groups:
-
-	$scope.activityLogArray.$loaded().then(function(returnedActivityArray) {
-		console.log("returnedActivityArray", returnedActivityArray);
-
-		var allGroups = returnedActivityArray.map(function(activity) {
-			return activity.group;
-		})
-
-		console.log("allGroups", allGroups);
-		var uniqueGroups = _.uniq(allGroups);
-		console.log("uniqueGroups", uniqueGroups);
-
-		$scope.totalGroups = uniqueGroups.length;
-
-		})
-
-	//total Events:
-
-	$scope.activityLogArray.$loaded().then(function(returnedActivityArray) {
-		console.log("returnedActivityArray", returnedActivityArray);
-
-		var allEvents = returnedActivityArray.map(function(activity) {
-			return activity.activity;
-		})
-
-		console.log("allEvents", allEvents);
-		var uniqueEvents = _.uniq(allEvents);
-		console.log("uniqueEvents", uniqueEvents);
-
-		$scope.totalEvents = uniqueEvents.length;
-
-		})
-
 
 
 }]);
