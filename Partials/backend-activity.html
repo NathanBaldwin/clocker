@@ -24,7 +24,7 @@
 			</div>
 				<div class="col-sm-5"> Group:
 					<label for="group-select">
-						<select class="form-control" ng-model="group">
+						<select ng-change="showFilteredSummary()" class="form-control" ng-model="group">
 						  <option>Vanderbilt</option>
 						  <option>Belmont</option>
 						  <option>USN</option>
@@ -50,15 +50,15 @@
 			</div>
 			<div class="col-sm-3">
 				<h4>Total Hours:</h4>
-				<h5 ng-model="totalHours">{{totalHours}}</h5>
+				<h5 ng-model="totalHours">{{filteredSum}}</h5>
 			</div>
 			<div class="col-sm-3">
 				<h4>Total Groups:</h4>
-				<h5 ng-model="totalGroups">{{totalGroups}}</h5>
+				<h5 ng-model="groupTotal">{{groupTotal}}</h5>
 			</div>
 			<div class="col-sm-3">
 				<h4>Total Events/Activities:</h4>
-				<h5 ng-model="totalEvents">{{totalEvents}}</h5>
+				<h5 ng-model="eventsTotal">{{eventsTotal}}</h5>
 			</div>
 		</div>
 			
@@ -74,14 +74,17 @@
 						<th>Group</th>
 						
 					</tr>
-					<tr ng-repeat="activity in activityLogArray | afterDateFilter: selectedStart | beforeDateFilter: selectedEnd | filterBy: ['firstName', 'lastName']: searchName | filterBy: ['group']: group | filterBy: ['activity']: event | resultsCatcher">
+					<tr ng-repeat="activity in filteredResults = (activityLogArray | afterDateFilter: selectedStart | beforeDateFilter: selectedEnd | filterBy: ['firstName', 'lastName']: searchName | filterBy: ['group']: group | filterBy: ['activity']: event)">
 						<td>{{activity.firstName}} {{activity.lastName}}</td>
 						<td>{{activity.inFormatted}}</td>
 						<td>{{activity.outFormatted}}</td>
 						<td>{{activity.activity}}</td>
-						<td>{{activity.group}}</td>
-						
+						<td>{{activity.group}}</td>	
 					</tr>
+
+					<!-- <p>length of results: {{testOutput}}</p> -->
+					<!-- <p>length of results: {{filteredResults.length * 10}}</p> -->
+					<div hours activities="searchName"></div>
 
 				</table>
 				

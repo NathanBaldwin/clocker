@@ -1,38 +1,38 @@
-	app.filter('afterDateFilter', function(){
-	  return function(input, timeIn){
-	  	console.log("afterDate input", input);
-	    var out = [];
-	    angular.forEach(input, function(activity){
-	      if(moment(activity.in).isAfter(timeIn)){
-	        out.push(activity)
-	      }
-	    })
-	    console.log("afterDate out:", out);
-	    return out;
-	  }
-	})
+	// app.filter('afterDateFilter', function(){
+	//   return function(input, timeIn){
+	//   	console.log("afterDate input", input);
+	//     var out = [];
+	//     angular.forEach(input, function(activity){
+	//       if(moment(activity.in).isAfter(timeIn)){
+	//         out.push(activity)
+	//       }
+	//     })
+	//     console.log("afterDate out:", out);
+	//     return out;
+	//   }
+	// })
 
-	app.filter('beforeDateFilter', function(){
-	  return function(input, timeIn){
-	  	console.log("beforeDate input", input);
-	    var out = [];
-	    angular.forEach(input, function(activity){
-	      if(moment(activity.in).isBefore(timeIn)){
-	        out.push(activity)
-	      }
-	    })
-	  	console.log("beforeDate out:", out);
-	    return out;
-	  }
-	})
+	// app.filter('beforeDateFilter', function(){
+	//   return function(input, timeIn){
+	//   	console.log("beforeDate input", input);
+	//     var out = [];
+	//     angular.forEach(input, function(activity){
+	//       if(moment(activity.in).isBefore(timeIn)){
+	//         out.push(activity)
+	//       }
+	//     })
+	//   	console.log("beforeDate out:", out);
+	//     return out;
+	//   }
+	// })
 
-	app.filter('resultsCatcher', function(){
-	  return function(input){
-	  	console.log("resultsCatcher input", input);
+	// app.filter('resultsCatcher', function(){
+	//   return function(input){
+	//   	console.log("resultsCatcher input", input);
 	    
-	    return input;
-	  }
-	})
+	//     return input;
+	//   }
+	// })
 
 app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArray", "getAuthData", "$firebaseObject",
   function($scope, Auth, $location, $firebaseArray, getAuthData, $firebaseObject) {
@@ -55,7 +55,68 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 
 	};
 
-	//$scope.filteredResults = [];
+	//$scope.filteredResults = getAuthData.getFilteredResults();
+	//$scope.filteredResults = resultsCatcher;
+
+	$scope.filteredResults = [];
+	$scope.filteredSum = 0;
+
+	$scope.$watch(function() {
+  	console.log("new filteredResults", $scope.filteredResults);
+  	var sum = 0;
+
+  	//total hours calc:
+  	$scope.filteredResults.forEach(function (r) {
+		sum += r.totalSecs;
+		});
+
+		$scope.filteredSum = Number(Math.round((sum / 3600)+'e2') +'e-2')
+
+		console.log("$$scope.filteredSum", $scope.filteredSum);
+
+		//total events calc:
+		var allEvents = $scope.filteredResults.map(function(activity) {
+			return activity.activity;
+		})
+
+		console.log("allEvents", allEvents);
+		var uniqueEvents = _.uniq(allEvents);
+		console.log("uniqueEvents", uniqueEvents);
+
+		$scope.eventsTotal = uniqueEvents.length;
+
+		//total groups calc:
+
+		var allGroups = $scope.filteredResults.map(function(activity) {
+			return activity.group;
+		})
+
+		console.log("allGroups", allGroups);
+		var uniqueGroups = _.uniq(allGroups);
+
+		$scope.groupTotal = uniqueGroups.length;
+
+		//total people calc:
+
+		
+
+	})
+
+
+
+	// $scope.showFilteredSummary = function () {
+	// 	var sum = 0;
+
+	// 	$scope.filteredResults.forEach(function (r) {
+	// 		sum += r.totalSecs;
+	// 		console.log("r",r.totalSecs);
+	// 	});
+
+	// 	$scope.filteredSum = sum;
+	// 	console.log("$scope.filteredSum",$scope.filteredSum);
+
+	// 	return sum;
+	// }
 
 	$(function() {
 			$("#start-date-picker").datepicker({
@@ -117,6 +178,19 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 	})
 
 	//total hours:
+
+	
+	// $scope.$watch(function () {
+ //    $scope.filteredArray = $scope.$eval("activityLogArray | afterDateFilter: selectedStart | beforeDateFilter: selectedEnd | filterBy: ['firstName', 'lastName']: searchName | filterBy: ['group']: group | filterBy: ['activity']: event");
+	// });
+
+	// var testResults = $scope.filteredResults;
+
+	// $scope.$watch('testResults', function() {
+	// 	console.log("test results changed!!");
+	// })
+
+
 
 	$scope.activityLogArray.$loaded().then(function(returnedActivityArray) {
 		console.log("returnedActivityArray", returnedActivityArray);
