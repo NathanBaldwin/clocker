@@ -10,7 +10,12 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 	console.log("adminUid", adminUid);
 
 	$scope.activityLogArray = $firebaseArray(activityLogRef);
-	
+
+	$scope.activityLogArray.$loaded().then(function(returnedActivityArray) {
+		$scope.allActivitiesArray = returnedActivityArray.reverse();
+
+		})
+
 	//Start-date Picker functionality:
 
 	var startDate = "";
