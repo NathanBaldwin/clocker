@@ -75,6 +75,7 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
     	"group": $scope.group,
     	"activity": $scope.activity,
     	"inFormatted": moment().format('MMMM Do YYYY, h:mm:ss a'),
+    	"day": moment().format('MMMM Do, YYYY'),
     	"in": moment().format(),
     	"signedIn": true
     }
@@ -106,6 +107,7 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
     	"group": $scope.group,
     	"activity": $scope.activity,
     	"inFormatted": moment().format('MMMM Do YYYY, h:mm:ss a'),
+    	"day": moment().format('MMMM Do, YYYY'),
     	"in": moment().format(),
     	"signedIn": true
     }

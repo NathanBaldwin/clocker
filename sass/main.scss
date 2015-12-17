@@ -94,3 +94,13 @@ form button:hover {
 .backend-link {
   float: right;
 }
+
+table#activity-list td.no-side-border {
+  border: none;
+  border-right: solid 1px white;
+  border-left: solid 1px white;
+  border-style-left: none;
+  border-style-right: none;
+  background-color: white;
+  font-weight: 900;
+}
