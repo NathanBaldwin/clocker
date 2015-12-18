@@ -9,12 +9,12 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<label for="starting-date">Starting on:</label>
-				<input id="start-date-picker" type="text">
+				<input id="start-date-picker" type="text" ng-model="startDateText">
 				<p id="dateoutput"></p>
 			</div>
 			<div class="col-sm-6">
 				<label for="before-date">Before:</label>
-				<input id="before-date-picker" type="text">
+				<input id="before-date-picker" type="text" ng-model="beforeDateText">
 				<p id="dateoutput"></p>
 			</div>
 		</div>
@@ -73,7 +73,7 @@
 						<th>Event</th>
 						<th>Group</th>
 					</tr>
-					<tr ng-repeat-start="activity in filteredResults = (allActivitiesArray | afterDateFilter: selectedStart | beforeDateFilter: selectedEnd | filterBy: ['firstName + lastName']: searchName | filterBy: ['group']: group | filterBy: ['activity']: event)" ng-if="compareActivities(activity)">
+					<tr ng-repeat-start="activity in filteredResults = (allActivitiesArray | afterDateFilter: selectedStart : startDateText | beforeDateFilter: selectedEnd : beforeDateText | filterBy: ['firstName + lastName']: searchName | filterBy: ['group']: group | filterBy: ['activity']: event)" ng-if="compareActivities(activity)">
 						
 						<td class="no-side-border" colspan="5">{{activity.day}}</td>
 

@@ -16,6 +16,8 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 
 		})
 
+	$scope.startDateText = "";
+
 	//Start-date Picker functionality:
 
 	var startDate = "";
@@ -57,9 +59,9 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 			return activity.activity;
 		})
 
-		console.log("allEvents", allEvents);
+		//console.log("allEvents", allEvents);
 		var uniqueEvents = _.uniq(allEvents);
-		console.log("uniqueEvents", uniqueEvents);
+		// console.log("uniqueEvents", uniqueEvents);
 
 		$scope.eventsTotal = uniqueEvents.length;
 
@@ -69,7 +71,7 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 			return activity.group;
 		})
 
-		console.log("allGroups", allGroups);
+		//console.log("allGroups", allGroups);
 		var uniqueGroups = _.uniq(allGroups);
 
 		$scope.groupTotal = uniqueGroups.length;
@@ -86,7 +88,7 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 		})
 
 		var uniquePeople = _.uniq(allPeople);
-		console.log("uniquePeople", uniquePeople);
+		// console.log("uniquePeople", uniquePeople);
 		$scope.peopleTotal = uniquePeople.length;
 
 	})
@@ -103,6 +105,7 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 					console.log("converted Date:", convertDate(startDate));
 					var convertedDate = convertDate(startDate);
 					$scope.selectedStart = convertDate(startDate);
+					$scope.startDateText = $scope.selectedStart;
 					$scope.$apply();
 					var timeTest = moment(convertedDate).isAfter("2015-12-14T12:17:10-06:00");
 
@@ -126,6 +129,7 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 					console.log("converted before Date:", convertDate(beforeDate));
 					var convertedDate = convertDate(beforeDate);
 					$scope.selectedEnd = convertDate(beforeDate);
+					$scope.beforeDateText = $scope.selectedEnd;
 					$scope.$apply();
 					var timeTest = moment(convertedDate).isBefore("2015-12-14T12:17:10-06:00");
 
@@ -138,11 +142,11 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 		});
 
 	$scope.compareActivities = function(currentActivity) {
-		console.log("currentActivity", currentActivity);
-		console.log("$scope.filteredResults", $scope.filteredResults);
+		// console.log("currentActivity", currentActivity);
+		// console.log("$scope.filteredResults", $scope.filteredResults);
 
 		var currentIndex = $scope.filteredResults.indexOf(currentActivity);
-		console.log("currentIndex", currentIndex);
+		//console.log("currentIndex", currentIndex);
 		// console.log("$scope.filteredResults[currentIndex + 1]", $scope.filteredResults[currentIndex + 1]);
 
 		var prevActivity = $scope.filteredResults[currentIndex - 1]
@@ -152,16 +156,16 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 		};
 
 		var currentMoment = moment(currentActivity.in);
-		console.log("currentMoment", currentMoment);
+		// console.log("currentMoment", currentMoment);
 
 		var nextActMoment = moment(prevActivity.in)
-		console.log("nextActMoment", nextActMoment);
+		// console.log("nextActMoment", nextActMoment);
 
 		if (currentMoment.isSame(nextActMoment, 'd')) {
-			console.log("SAME day");
+			// console.log("SAME day");
 			return false;
 		} else {
-			console.log("++++++++PREVIOUS DAY++++++++++");
+			// console.log("++++++++PREVIOUS DAY++++++++++");
 			return true;
 		};
 

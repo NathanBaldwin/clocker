@@ -1,6 +1,8 @@
 app.filter('afterDateFilter', function(){
-	  return function(input, timeIn){
+	  return function(input, timeIn, startDateText){
 	  	// console.log("afterDate input", input);
+	  	console.log("timeIn", timeIn);
+	  	console.log("startDateText", startDateText);
 	    var out = [];
 	    angular.forEach(input, function(activity){
 	      if(moment(activity.in).isAfter(timeIn)){
@@ -8,12 +10,16 @@ app.filter('afterDateFilter', function(){
 	      }
 	    })
 	    // console.log("afterDate out:", out);
-	    return out;
+	    if ((timeIn === undefined) || (startDateText === "")) {
+	    	return input;
+	    } else {
+	    	return out;
+	    };
 	  }
 	})
 
 app.filter('beforeDateFilter', function(){
-  return function(input, timeIn){
+  return function(input, timeIn, beforeDateText){
   	// console.log("beforeDate input", input);
     var out = [];
     angular.forEach(input, function(activity){
@@ -22,22 +28,10 @@ app.filter('beforeDateFilter', function(){
       }
     })
   	// console.log("beforeDate out:", out);
-    return out;
+    if (beforeDateText === "") {
+	    	return input;
+	    } else {
+	    	return out;
+	    };
   }
 })
-
-// app.filter("as", function($parse) {
-//   return function(value, context, path) {
-//     return $parse(path).assign(context, value);
-//   };
-// });
-
-// app.filter('resultsCatcher', ["getAuthData",
-// 	function(getAuthData){
-//   return function(input){
-//   	console.log("resultsCatcher input", input);
-//   	getAuthData.setFilteredResults(input);
-
-//     return input;
-//   }
-// }])
