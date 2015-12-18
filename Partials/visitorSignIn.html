@@ -7,19 +7,18 @@
 				<div>
 					<input type="text" placeholder="email" size="50" ng-model="email">
 				</div>
-				<label for="group-select">Group:</label>
+					<label for="group-select">Group:</label>
 				<div>
 					<select ng-model="group" ng-change="enterNewGroupName()">
 						<option ng-repeat="group in groupsArray">{{group.$value}}</option>
-						<option >Other</option>
+						<option >Other...</option>
 					</select>
-				</div><label for="activity">Activity/Event:</label>
+				</div>
+					<label for="activity">Activity/Event:</label>
 				<div>
-					<select ng-model="activity">
-						<option>Literacy Tutoring</option>
-						<option>Board Meeting</option>
-						<option>Admin Work</option>
-						<option>HCA Impact Day</option>
+					<select ng-model="activity" ng-change="enterNewActivityName()">
+						<option ng-repeat="activityName in activityNamesArray">{{activityName.$value}}</option>
+						<option >Other...</option>
 					</select>
 				</div>
 				<button ng-click="findVisitor()">Sign In</button>
@@ -47,9 +46,6 @@
 						<td><button id="{{visitor.$id}}" ng-click="signOut()">Sign Out</button></td>
 						
 					</tr>
-
-
-
 				</table>
 				
 			</div>
@@ -117,10 +113,33 @@
 									<input type="text" placeholder="first name" size="50" ng-model="newGroupName">
 								</div>
 					    
-          </div>
+          		</div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" ng-click="createNewGroup()">Save</button>
+           </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Create New Activity/Event Type Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="enterNewActivityModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            
+				      <div>
+				      	<h4>Please enter your event/activity:</h4>
+					      <div>
+									<input type="text" placeholder="first name" size="50" ng-model="newActivityName">
+								</div>
+          		</div>
+	          <div class="modal-footer">
+	            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	            <button type="button" class="btn btn-primary" ng-click="createNewActivityName()">Save</button>
+            </div>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->

@@ -7,6 +7,8 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 	var adminUid = currentAuthData.uid;
 	var pastVisitorsRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/visitors");
 	var activityLogRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/activityLog");
+	var groupsRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/groups");
+	var activityNamesRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/activityNames");
 	console.log("adminUid", adminUid);
 
 	$scope.activityLogArray = $firebaseArray(activityLogRef);
@@ -15,6 +17,10 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 		$scope.allActivitiesArray = returnedActivityArray.reverse();
 
 		})
+
+	$scope.groupsArray = $firebaseArray(groupsRef);
+
+	$scope.activityNamesArray = $firebaseArray(activityNamesRef);
 
 	$scope.startDateText = "";
 

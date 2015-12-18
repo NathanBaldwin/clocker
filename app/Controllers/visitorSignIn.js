@@ -7,9 +7,10 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
   	var ref = new Firebase("https://clocker.firebaseio.com/");
 	var currentAuthData = ref.getAuth();
 	var adminUid = currentAuthData.uid;
-		var pastVisitorsRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/visitors");
+	var pastVisitorsRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/visitors");
 	var activityLogRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/activityLog");
 	var groupsRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/groups");
+	var activityNamesRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/activityNames");
 	console.log("adminUid", adminUid);
 
 	if (currentAuthData) {
@@ -33,11 +34,13 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
 
 	})
 
+	$scope.activityNamesArray = $firebaseArray(activityNamesRef);
+
 	$scope.enterNewGroupName = function() {
 		console.log("you clicked on OTHER!");
 		console.log("$scope.group", $scope.group);
 
-		if ($scope.group === "Other") {
+		if ($scope.group === "Other...") {
 			console.log("you selected other!");
 			$("#createNewGroupModal").modal('show');
 		};
@@ -48,6 +51,22 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
 	$scope.createNewGroup = function() {
 		groupsRef.push($scope.newGroupName);
 		$scope.group = $scope.newGroupName;
+	}
+
+	$scope.enterNewActivityName = function() {
+		console.log("you clicked on activty select!");
+		if ($scope.activity === "Other...") {
+			console.log("you selected other!");
+			$("#enterNewActivityModal").modal('show');
+		};
+	}
+
+	$scope.newActivityName = "";
+
+	$scope.createNewActivityName = function() {
+		console.log("you clicked create new activity!!!");
+		activityNamesRef.push($scope.newActivityName);
+		$scope.activity = $scope.newActivityName;
 	}
 
 

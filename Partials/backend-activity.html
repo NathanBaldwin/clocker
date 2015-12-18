@@ -22,23 +22,19 @@
 			<div class="col-sm-2">
 				<input type="text" placeholder="Search Name" ng-model="searchName">
 			</div>
-				<div class="col-sm-5"> Group:
+				<div class="col-sm-5">
 					<label for="group-select">
-						<select ng-change="showFilteredSummary()" class="form-control" ng-model="group">
-						  <option>Vanderbilt</option>
-						  <option>Belmont</option>
-						  <option>USN</option>
-						  <option>Covenant Presbyterian Church</option>
+						<select class="form-control" ng-model="group" >
+						<option value="">Group</option>
+						  <option ng-repeat="group in groupsArray">{{group.$value}}</option>
 						</select>
 					</label>
 				</div>
-				<div class="col-sm-5"> Event/Activity:
+				<div class="col-sm-5">
 					<label for="event-selece">
 						<select class="form-control" ng-model="event">
-						  <option>Literacy Tutoring</option>
-						  <option>Board meeting</option>
-						  <option>Admin Work</option>
-						  <option>HCA Impact Day</option>
+						<option value="">Event/Activity</option>
+						  <option ng-repeat="activityName in activityNamesArray">{{activityName.$value}}</option>
 						</select>
 					</label>
 				</div>
