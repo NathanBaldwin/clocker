@@ -5,15 +5,16 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
   	//*****************VISITOR SIGN IN FORM FUNCTIONALITY*************
 
   	var ref = new Firebase("https://clocker.firebaseio.com/");
-		var currentAuthData = ref.getAuth();
-		var adminUid = currentAuthData.uid;
-  	var pastVisitorsRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/visitors");
-		var activityLogRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/activityLog");
-		console.log("adminUid", adminUid);
+	var currentAuthData = ref.getAuth();
+	var adminUid = currentAuthData.uid;
+		var pastVisitorsRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/visitors");
+	var activityLogRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/activityLog");
+	var groupsRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/groups");
+	console.log("adminUid", adminUid);
 
-		if (currentAuthData) {
-  		console.log("Authenticated user with uid:", currentAuthData.uid);
-		}
+	if (currentAuthData) {
+		console.log("Authenticated user with uid:", currentAuthData.uid);
+	}
 
 
 
@@ -22,9 +23,32 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
   	$scope.pastVisitorsArray = $firebaseArray(pastVisitorsRef);
 
   	$scope.pastVisitorsArray.$loaded().then(function(pastVisitorsArray) {
-			console.log("pastVisitors data:", $scope.pastVisitorsArray);
+		console.log("pastVisitors data:", $scope.pastVisitorsArray);
+	})
 
-		})
+	$scope.groupsArray = $firebaseArray(groupsRef);
+
+	$scope.groupsArray.$loaded().then(function(groupsArray) {
+		console.log("groups data:", $scope.groupsArray);
+
+	})
+
+	$scope.enterNewGroupName = function() {
+		console.log("you clicked on OTHER!");
+		console.log("$scope.group", $scope.group);
+
+		if ($scope.group === "Other") {
+			console.log("you selected other!");
+			$("#createNewGroupModal").modal('show');
+		};
+	}
+
+	$scope.newGroupName = "";
+
+	$scope.createNewGroup = function() {
+		groupsRef.push($scope.newGroupName);
+		$scope.group = $scope.newGroupName;
+	}
 
 
   	$scope.findVisitor = function() {
@@ -174,16 +198,8 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
 				})
 			})
 
-			// fbActivityRef.update({
-			// 	signedIn: false,
-			// 	out: moment().format('MMMM Do YYYY, h:mm:ss a')
-			// })
 		})
 
-
-
 	}
-
-
 
 }]);

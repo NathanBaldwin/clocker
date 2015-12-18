@@ -9,11 +9,9 @@
 				</div>
 				<label for="group-select">Group:</label>
 				<div>
-					<select ng-model="group">
-						<option>Vanderbilt</option>
-						<option>Belmont</option>
-						<option>USN</option>
-						<option>Covenant Presbyterian Church</option>
+					<select ng-model="group" ng-change="enterNewGroupName()">
+						<option ng-repeat="group in groupsArray">{{group.$value}}</option>
+						<option >Other</option>
 					</select>
 				</div><label for="activity">Activity/Event:</label>
 				<div>
@@ -101,6 +99,28 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" ng-click="createNewVisitor()">Sign me in!</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Create New Group Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="createNewGroupModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            
+				      <div>
+				      	<h4>Please enter your group:</h4>
+				      	<div>
+									<input type="text" placeholder="first name" size="50" ng-model="newGroupName">
+								</div>
+					    
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" ng-click="createNewGroup()">Save</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
