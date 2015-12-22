@@ -35,3 +35,44 @@ app.filter('beforeDateFilter', function(){
 	    };
   }
 })
+
+app.filter('groupFilter', function(){
+  return function(input, selectedGroups){
+  	// console.log("groupFilter input", input);
+  	console.log("groupFilter selectedGroups", selectedGroups[0]);
+    var out = [];
+
+    if (selectedGroups[0] === undefined) {
+    	console.log("no groups selected!++++++++++++");
+    	return input;
+    };
+
+    angular.forEach(input, function(activity){
+      if(_.contains(selectedGroups, activity.group)){
+        out.push(activity)
+      }
+    })
+	return out; 
+  }
+})
+
+app.filter('activityFilter', function(){
+  return function(input, selectedActivities){
+  	// console.log("groupFilter input", input);
+  	console.log("groupFilter selectedActivities", selectedActivities[0]);
+    var out = [];
+
+    if (selectedActivities[0] === undefined) {
+    	console.log("no groups selected!++++++++++++");
+    	return input;
+    };
+
+    angular.forEach(input, function(activity){
+      if(_.contains(selectedActivities, activity.activity)){
+        out.push(activity)
+      }
+    })
+	return out; 
+  }
+})
+

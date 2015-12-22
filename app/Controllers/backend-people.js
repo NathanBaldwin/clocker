@@ -1,4 +1,4 @@
-app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArray", "getAuthData", "$firebaseObject",
+app.controller('backend-people', ["$scope", "Auth", "$location", "$firebaseArray", "getAuthData", "$firebaseObject",
   function($scope, Auth, $location, $firebaseArray, getAuthData, $firebaseObject) {
   	console.log("I see backend-activity controller!");
 

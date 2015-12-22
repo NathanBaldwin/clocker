@@ -1,8 +1,7 @@
 app.directive('smartRow', function($compile) {
     return  {
       restrict: 'A',
-      transclude: 'element',
-      link: function(scope, element, attr, ctrls, transcludeFn) {
+      link: function(scope, element, attr, ctrls) {
         var model = scope.$eval(attr.smartRow);
         //console.log("model", model);
         transcludeFn(function(clone) {
