@@ -1,32 +1,41 @@
 
-	<div class="container-fluid">
-		<div class="row">
+	<div class="container-fluid" id="visitor-sign-in">
+		<div class="row form-group">
 			<!-- visitor sign in form start-->
 			<div class="col-sm-5">
-				<h1>Visitor sign in page</h1>
-				<div>
-					<input type="text" placeholder="email" size="50" ng-model="email">
+				<h1>Sign In</h1>
+				<div class="row">
+					<div class="col-sm-9">
+						<input type="text" class="form-control" placeholder="email" size="50" ng-model="email">
+					</div>
 				</div>
+				<div class="row">
+				<div class="col-sm-7">
 					<label for="group-select">Group:</label>
-				<div>
-					<select ng-model="group" ng-change="enterNewGroupName()">
-						<option ng-repeat="group in groupsArray">{{group.$value}}</option>
-						<option >Other...</option>
-					</select>
+					<div>
+						<select ng-model="group" class="form-control input-medium" ng-change="enterNewGroupName()">
+							<option ng-repeat="group in groupsArray">{{group.$value}}</option>
+							<option >Other...</option>
+						</select>
+					</div>
 				</div>
-					<label for="activity">Activity/Event:</label>
-				<div>
-					<select ng-model="activity" ng-change="enterNewActivityName()">
-						<option ng-repeat="activityName in activityNamesArray">{{activityName.$value}}</option>
-						<option >Other...</option>
-					</select>
 				</div>
-				<button ng-click="findVisitor()">Sign In</button>
+
+				<div class="row">
+				<div class="col-sm-7">
+				<label for="activity">Activity/Event:</label>
+						<select ng-model="activity" class="form-control" ng-change="enterNewActivityName()">
+							<option ng-repeat="activityName in activityNamesArray">{{activityName.$value}}</option>
+							<option >Other...</option>
+						</select>
+					</div>
+				</div>
+				<button class="btn btn-default" ng-click="findVisitor()">Sign In</button>
 			</div>
 			<!-- visitor sign in form end -->
 			<div class="col-sm-7">
 				<div>
-					<h1 class="live-log-title">visitor log</h1>
+					<h1 class="live-log-title">Sign Out</h1>
 					<a href="#/clocker/backend/activity/" class="btn btn-default btn-xs backend-link">Analyze Data</a>
 				</div>
 

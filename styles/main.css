@@ -1,5 +1,23 @@
+html {
+  top: 0px;
+  bottom: 0px;
+  height: 100%; }
+
+#parial-body {
+  top: 0px;
+  bottom: 0px;
+  height: 100%; }
+
+body {
+  top: 0px;
+  bottom: 0px;
+  height: 100%; }
+
+label {
+  margin-top: 7px; }
+
 body * {
-  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; }
+  font-family: 'Quicksand', sans-serif; }
 
 .wrapper {
   background: #223749;
@@ -96,5 +114,12 @@ table#activity-list td.no-side-border {
 
 .dropdown-spacing {
   padding-right: 20px; }
+
+#visitor-sign-in {
+  height: 100%;
+  background-color: #80B300;
+  top: 0px;
+  bottom: 0px;
+  height: 100%; }
 
 /*# sourceMappingURL=main.css.map */
