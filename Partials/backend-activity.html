@@ -109,19 +109,23 @@
 								<th>Time Out</th>
 								<th>Event</th>
 								<th>Group</th>
+								<th>Total Time</th>
 							</tr>
 							<tr ng-repeat-start="activity in filteredResults = (allActivitiesArray | afterDateFilter: selectedStart : startDateText | beforeDateFilter: selectedEnd : beforeDateText | groupFilter: selectedGroups | activityFilter: selectedActivities | filterBy: ['firstName + lastName']: searchName)" ng-if="compareActivities(activity)">
 								
-								<td class="no-side-border" colspan="5">{{activity.day}}</td>
+								<td class="no-side-border" colspan="6">{{activity.day}}</td>
 		
 							</tr>
 							<tr ng-repeat-end="" >
 								<td>{{activity.firstName}} {{activity.lastName}}</td>
-								<td>{{activity.inFormatted}}</td>
-								<td>{{activity.outFormatted}}</td>
+								<td in time-in="{{activity.in}}"></td>
+								<!-- <td in timeInFormatted="{{activity.inFormatted}}">{{activity.inFormatted}}</td> -->
+								<td out time-out="{{activity.out}}"></td>
+								<!-- <td out time-out="{{activity.outFormatted}}">{{activity.outFormatted}}</td> -->
 								<td>{{activity.activity}}</td>
 								<td>{{activity.group}}</td>	
-		        	</tr>
+								<td total-time time-in="{{activity.in}}" time-out="{{activity.out}}"></td>	
+		        			</tr>
 						</table>
 					</div>
 			</div>

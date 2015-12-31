@@ -30,32 +30,32 @@
 
 //     	console.log("filteredResults", scope.filteredResults);
 
-   //  	scope.$watch(function() {
-   //  		console.log("new filteredResults", scope.filteredResults);
+//     	scope.$watch(function() {
+//     		console.log("new filteredResults", scope.filteredResults);
 
-   //  		var sum = 0;
+//     		var sum = 0;
 
-   //  		scope.filteredResults.forEach(function (r) {
-			// sum += r.totalSecs;
-			// });
+//     		scope.filteredResults.forEach(function (r) {
+// 			sum += r.totalSecs;
+// 			});
 
-			// scope.filteredSum = sum / 3600;
-			// console.log("$scope.filteredSum", scope.filteredSum);
-	  //   	})
+// 			scope.filteredSum = sum / 3600;
+// 			console.log("$scope.filteredSum", scope.filteredSum);
+// 	    	})
 
-    	// scope.$watch('filteredResults', function(value){
-     //    console.log("value changed", value);
+//     	scope.$watch('filteredResults', function(value){
+//         console.log("value changed", value);
         
-      // });
+//       });
 
 
-    	// console.log("scope.originalArray", scope.originalArray);
+//     	console.log("scope.originalArray", scope.originalArray);
 
-    	// scope.$watch('originalArray', function(value){
-     //    console.log("value changed", value);
-     //    console.log("filtered:", filtered);
+//     	scope.$watch('originalArray', function(value){
+//         console.log("value changed", value);
+//         console.log("filtered:", filtered);
         
-      // });
+//       });
       
 // 	}
       

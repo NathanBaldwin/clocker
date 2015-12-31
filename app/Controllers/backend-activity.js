@@ -55,7 +55,7 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 
 		});
 
-		$scope.filteredSum = Number(Math.round((sum / 3600)+'e2') +'e-2')
+		$scope.filteredSum = Number(Math.round((sum / 3600)+'e2') +'e-2');
 
 		console.log("$$scope.filteredSum", $scope.filteredSum);
 
