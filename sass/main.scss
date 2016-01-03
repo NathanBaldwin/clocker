@@ -1,5 +1,12 @@
 $heading-font: Helvetica;
-$background-green: #80B300;
+$background-green: #5B8623;
+$darker-green: #588302;
+$background-black: #262626;
+
+$dark-black: #050300;
+$gray-writing: #919191;
+$dark-gray-border: #787878;
+$white-ish: #E3E3E3;
 
 html {
   top: 0px;
@@ -9,7 +16,6 @@ html {
 
 #parial-body {
   top: 0px;
-  bottom: 0px;
   height: 100%;
 }
 
@@ -25,6 +31,26 @@ label {
 
 body * {
   font-family: 'Quicksand', sans-serif;
+}
+
+h1.visitor-page-heading {
+  margin-top: 7px;
+  color: $white-ish;
+  margin-bottom: 20px;
+}
+
+button.dropdown-select {
+  color: $background-black;
+  background-color: $background-green;
+  margin-right: 20px;
+  border: solid 1px $background-black;
+}
+
+input.dropdown-select {
+  color: $background-black;
+  background-color: $background-green;
+  border: solid 1px $background-black;
+
 }
 
 // login splash page
@@ -112,12 +138,55 @@ form button:hover {
 
 //********* VISITOR SIGN-IN PAGE ********
 
+#visitor-sign-in-form {
+  border-right: solid 1px $white-ish;
+  height: calc(100% - 40px);
+  padding-right: 0px;
+  
+}
+
+#sign-out {
+  text-align: right;
+}
+
+.inherit-height {
+  height: inherit;
+  
+}
+
 .live-log-title {
   display: inline;
 }
 
 .backend-link {
   float: right;
+}
+
+.sign-out-margins {
+  padding-left: 4%;
+  padding-right: 2%;
+}
+
+.user-selection {
+  padding-left: 15px;
+}
+
+.activity-selection {
+  margin-top: 0px;
+  margin-right: 3%;
+}
+
+#important-button {
+  color: $background-green;
+  background-color: $background-black;
+  //border: solid 1px $background-black;
+}
+
+.important-btn-sm {
+  color: $background-green;
+  background-color: $background-black;
+  text-align: center;
+  //border: solid 1px $background-black;
 }
 
 table#activity-list td.no-side-border {
@@ -134,10 +203,99 @@ table#activity-list td.no-side-border {
   padding-right: 20px;
 }
 
-#visitor-sign-in {
+#visitor-sign-in-page {
   height: 100%;
   background-color: $background-green;
-  top: 0px;
-  bottom: 0px;
-  height: 100%;
+}
+
+input::-webkit-input-placeholder {
+color: $background-black !important;
+}
+ 
+input:-moz-placeholder { /* Firefox 18- */
+color: $background-black !important;  
+}
+ 
+input::-moz-placeholder {  /* Firefox 19+ */
+color: $background-black !important;  
+}
+ 
+input:-ms-input-placeholder {  
+color: $background-black !important;  
+}
+
+// visitor log table styling:
+
+// #table-header {
+//   background-color: $background-black;
+//   color: $background-green;
+// }
+
+// .panel {
+//   border: solid 1px $background-black !important;
+//   border-radius: 10px;
+// }
+
+// .table-striped>tbody>tr>th:first-child {
+// border-top-left-radius: 15px;
+// //background-color: $background-green;
+// color: $background-black;
+// border: none;
+// }
+
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
+  border-top: 0px solid #ddd;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd) {
+   background-color: $darker-green;
+   //color: $gray-writing;
+   //border-top: none;
+ }
+.table-striped>tbody>tr:nth-child(even)>td, 
+.table-striped>tbody>tr:nth-child(even) {
+   background-color: $background-green;
+   //border-top: none;
+ }
+
+.table-striped>tbody>tr>th {
+  background-color: $background-black;
+  color: $white-ish;
+  font-weight: 100;
+  text-align: center;
+}
+
+
+.table-curved {
+   border-collapse: separate;
+   border: solid $background-black 1px;
+   border-radius: 6px;
+   border-left: 0px;
+   //border-top: 0px;
+}
+.table-curved > thead:first-child > tr:first-child > th {
+    border-bottom: 0px;
+    border-top: solid $background-black 1px;
+}
+.table-curved td, .table-curved th {
+    border-left: 1px solid $background-black;
+    border-top: 1px solid $background-black;
+}
+.table-curved > :first-child > :first-child > :first-child {
+    border-top-left-radius: 6px;
+}
+.table-curved > :first-child > :first-child > :last-child {
+    border-top-right-radius: 6px;
+}
+.table-curved > :last-child > :last-child > :first-child {
+    border-bottom-left-radius: 6px;
+}
+.table-curved > :last-child > :last-child > :last-child {
+    border-bottom-right-radius: 6px;
 }

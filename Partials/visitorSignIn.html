@@ -1,46 +1,79 @@
 
-	<div class="container-fluid" id="visitor-sign-in">
-		<div class="row form-group">
+	
+	<div class="container-fluid" id="visitor-sign-in-page">
+		<div class="row">
+			<div class="col-sm-2 col-sm-offset-10">
+				<a href="#/clocker/backend/activity/" class="backend-link">Analyze Data</a>
+			</div>
+		</div>
+		<div class="row inherit-height">
 			<!-- visitor sign in form start-->
-			<div class="col-sm-5">
-				<h1>Sign In</h1>
+			<div class="col-sm-4" id="visitor-sign-in-form">
+				<h1 class="visitor-page-heading">Sign In</h1>
 				<div class="row">
-					<div class="col-sm-9">
-						<input type="text" class="form-control" placeholder="email" size="50" ng-model="email">
+					<div class="col-sm-10 form-group">
+						<input type="text" class="form-control dropdown-select" placeholder="Enter email..." size="50" ng-model="email">
 					</div>
 				</div>
 				<div class="row">
-				<div class="col-sm-7">
-					<label for="group-select">Group:</label>
-					<div>
-						<select ng-model="group" class="form-control input-medium" ng-change="enterNewGroupName()">
-							<option ng-repeat="group in groupsArray">{{group.$value}}</option>
-							<option >Other...</option>
-						</select>
+					<div class="col-sm-4">
+		       <div class="form-group btn-group">
+						  <button type="button" class="btn dropdown-select dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    Select Group <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu">
+						    <li ng-repeat="group in groupsArray">
+		            	<a ng-click="setSelectedGroup()">
+		            		<span class="dropdown-spacing">{{group.$value}}</span>
+		            		
+		            	</a>
+		             </li>
+						    
+						    <li role="separator" class="divider"></li>
+						    <li><a ng-click="enterNewGroupName()">Other...</a></li>
+						  </ul>
+						</div>
+					</div>
+					<div class="col-sm-7">
+						<h4 class="user-selection" ng-model="group">{{group}}</h4>	
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-sm-3">
+		       <div class="form-group btn-group">
+						  <button type="button" class="btn dropdown-select dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    Select Event/Activity <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu">
+						    <li ng-repeat="activityName in activityNamesArray">
+		            	<a ng-click="setSelectedActivity()">
+		            		<span class="dropdown-spacing">{{activityName.$value}}</span>
+		            		
+		            	</a>
+		             </li>
+						    
+						    <li role="separator" class="divider"></li>
+						    <li><a ng-click="enterNewActivityName()">Other...</a></li>
+						  </ul>
+						</div>
+					</div>
+					<div class="col-sm-6 col-sm-offset-3">
+						<h4 class="user-selection activity-selection" ng-model="activity">{{activity}}</h4>	
+					</div>
 				</div>
 
-				<div class="row">
-				<div class="col-sm-7">
-				<label for="activity">Activity/Event:</label>
-						<select ng-model="activity" class="form-control" ng-change="enterNewActivityName()">
-							<option ng-repeat="activityName in activityNamesArray">{{activityName.$value}}</option>
-							<option >Other...</option>
-						</select>
-					</div>
-				</div>
-				<button class="btn btn-default" ng-click="findVisitor()">Sign In</button>
+				<button class="btn" id="important-button" ng-click="findVisitor()">Sign In</button>
 			</div>
 			<!-- visitor sign in form end -->
-			<div class="col-sm-7">
-				<div>
-					<h1 class="live-log-title">Sign Out</h1>
-					<a href="#/clocker/backend/activity/" class="btn btn-default btn-xs backend-link">Analyze Data</a>
+
+			<div class="col-sm-8 sign-out-margins">
+				<div >
+					<h1 class="visitor-page-heading" id="sign-out">Sign Out</h1>
 				</div>
 
-				<table class="table table-striped table-hover table-responsive table-bordered">
-					<tr>
+				<!-- <div class="panel panel-default"> -->
+					<table class="table table-striped table-hover table-responsive table-curved" id="visitor-log-table">
+					<tr id="table-header">
 						<th>Name</th>
 						<th>Time In</th>
 						<th>Event</th>
@@ -52,10 +85,11 @@
 						<td>{{visitor.inFormatted}}</td>
 						<td>{{visitor.activity}}</td>
 						<td>{{visitor.group}}</td>
-						<td><button id="{{visitor.$id}}" ng-click="signOut()">Sign Out</button></td>
+						<td><button class="btn btn-xs important-btn-sm" id="{{visitor.$id}}" ng-click="signOut()">Sign Out</button></td>
 						
 					</tr>
 				</table>
+			<!-- </div> -->
 				
 			</div>
 		</div>

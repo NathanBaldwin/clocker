@@ -39,12 +39,21 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
 	$scope.enterNewGroupName = function() {
 		console.log("you clicked on OTHER!");
 		console.log("$scope.group", $scope.group);
+		$("#createNewGroupModal").modal('show');
 
-		if ($scope.group === "Other...") {
-			console.log("you selected other!");
-			$("#createNewGroupModal").modal('show');
-		};
+		// if ($scope.group === "Other...") {
+		// 	console.log("you selected other!");
+		// };
 	}
+
+
+	$scope.group = "";
+
+
+    $scope.setSelectedGroup = function () {
+		console.log("you selected a group!");
+        $scope.group = this.group.$value;
+    };
 
 	$scope.newGroupName = "";
 
@@ -53,12 +62,17 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
 		$scope.group = $scope.newGroupName;
 	}
 
+	$scope.activity = "";
+	
+	$scope.setSelectedActivity = function () {
+		console.log("you selected an activity!");
+        $scope.activity = this.activityName.$value;
+    };
+
 	$scope.enterNewActivityName = function() {
 		console.log("you clicked on activty select!");
-		if ($scope.activity === "Other...") {
-			console.log("you selected other!");
-			$("#enterNewActivityModal").modal('show');
-		};
+		$("#enterNewActivityModal").modal('show');
+		
 	}
 
 	$scope.newActivityName = "";
