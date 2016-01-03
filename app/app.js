@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngRoute', 'firebase', 'ngResource', 'angular.filter']);
+var app = angular.module("app", ['ngRoute', 'firebase', 'ngResource', 'angular.filter', 'floatThead']);
 
 app.config(['$routeProvider',
   function($routeProvider) {

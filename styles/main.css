@@ -227,4 +227,52 @@ input:-ms-input-placeholder {
 .table-curved > :last-child > :last-child > :last-child {
   border-bottom-right-radius: 6px; }
 
+#activity-log-page {
+  padding: 5px;
+  padding-right: 10px; }
+
+#activity-filter-sidebar {
+  width: 200px;
+  position: fixed; }
+
+.padding-for-sidebar {
+  padding-left: 200px; }
+
+.padding-for-add-sidebar-button {
+  padding-left: 30px; }
+
+.hidden {
+  visibility: hidden; }
+
+#fixed-header {
+  background-color: white;
+  border: none;
+  padding-bottom: 6px; }
+
+#invisible-header {
+  visibility: hidden;
+  margin-bottom: 0px;
+  border-bottom: 0px; }
+
+.wide-margin {
+  margin-left: 200px; }
+
+.thin-margin {
+  margin-left: 20px; }
+
+.fixed {
+  position: fixed; }
+
+#space-for-add-sidebar-button {
+  width: 20px;
+  padding-left: 10px;
+  position: fixed;
+  z-index: 9999; }
+
+.dropdown-select-spacing {
+  margin-top: 10px; }
+
+.activity-log-header {
+  background-color: white; }
+
 /*# sourceMappingURL=main.css.map */
