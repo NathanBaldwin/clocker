@@ -39,8 +39,16 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 	$scope.filteredResults = [];
 	$scope.filteredSum = 0;
 
+	
+
 	$scope.$watch(function() {
   	//console.log("new filteredResults", $scope.filteredResults);
+
+  	//console.log("event:", event);
+
+  	
+
+  	
   	var sum = 0;
 
   	//total hours calc:
@@ -57,8 +65,15 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 		});
 
 		$scope.filteredSum = Number(Math.round((sum / 3600)+'e2') +'e-2');
+		
+
+
+
 
 		console.log("$$scope.filteredSum", $scope.filteredSum);
+
+
+
 
 
 		//total events calc:
@@ -97,6 +112,8 @@ app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArr
 		var uniquePeople = _.uniq(allPeople);
 		// console.log("uniquePeople", uniquePeople);
 		$scope.peopleTotal = uniquePeople.length;
+
+
 
 	})
 
@@ -239,29 +256,37 @@ $scope.closeDropdowns = function() {
 //****** Sidebar hide/show functionality: *********
 
 $scope.hideSidebar = function () {
-	//console.log("you clicked hide sidebar!");
+	console.log("you clicked hide sidebar!");
+	$scope.varForReflowWatch = $scope.varForReflowWatch + 1;
 	$("#activity-log-body").removeClass("padding-for-sidebar");
 	$("#activity-log-body").addClass("padding-for-add-sidebar-button");
 	$("#activity-filter-sidebar").hide();
 	$("#space-for-add-sidebar-button").removeClass("hidden");
 	$("#fixed-header").removeClass("wide-margin");
 	$("#fixed-header").addClass("thin-margin");
-	$scope.varForReflowWatch = $scope.varForReflowWatch + 1;
 }
 
 $scope.showSidebar = function () {
 
+	$scope.varForReflowWatch = $scope.varForReflowWatch + 1;
 	$("#activity-log-body").addClass("padding-for-sidebar");
 	$("#activity-log-body").removeClass("padding-for-add-sidebar-button");
 	$("#activity-filter-sidebar").show();
 	$("#space-for-add-sidebar-button").addClass("hidden");
 	$("#fixed-header").addClass("wide-margin");
 	$("#fixed-header").removeClass("thin-margin");
-	$scope.varForReflowWatch = $scope.varForReflowWatch + 1;
 
 }
 
-$scope.varForReflowWatch = 1;
+$scope.varForReflowWatch = 0;
+
+$scope.$watch('filteredSum', function() {
+	console.log("watch worked!!");
+	$scope.varForReflowWatch = $scope.varForReflowWatch + 1;
+
+})
+
+
 
 $scope.activityHeader = {
     top: 150,

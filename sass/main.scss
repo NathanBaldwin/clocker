@@ -2,11 +2,12 @@ $heading-font: Helvetica;
 $background-green: #5B8623;
 $darker-green: #588302;
 $background-black: #262626;
-
-$dark-black: #050300;
+$lighter-black: #2C2C2A;
+$dark-black: black;
 $gray-writing: #919191;
 $dark-gray-border: #787878;
 $white-ish: #E3E3E3;
+$blue: #1C416D;
 
 html {
   top: 0px;
@@ -141,8 +142,25 @@ form button:hover {
 #visitor-sign-in-form {
   border-right: solid 1px $white-ish;
   height: calc(100% - 40px);
-  padding-right: 0px;
-  
+  padding-right: 0px; 
+}
+
+#analyze-data-page-button {
+  top: 15px;
+  text-align: right;
+  right: 0px;
+  margin-bottom: 20px;
+  position: relative;
+  background-color: $background-green;
+  border: solid 1px $background-black;
+}
+
+.right-align {
+  text-align: right;
+}
+
+.data-button-padding {
+  margin-right: -1%;
 }
 
 #sign-out {
@@ -189,15 +207,7 @@ form button:hover {
   //border: solid 1px $background-black;
 }
 
-table#activity-list td.no-side-border {
-  border: none;
-  border-right: solid 1px white;
-  border-left: solid 1px white;
-  border-style-left: none;
-  border-style-right: none;
-  background-color: white;
-  font-weight: 900;
-}
+
 
 .dropdown-spacing {
   padding-right: 20px;
@@ -223,25 +233,6 @@ color: $background-black !important;
 input:-ms-input-placeholder {  
 color: $background-black !important;  
 }
-
-// visitor log table styling:
-
-// #table-header {
-//   background-color: $background-black;
-//   color: $background-green;
-// }
-
-// .panel {
-//   border: solid 1px $background-black !important;
-//   border-radius: 10px;
-// }
-
-// .table-striped>tbody>tr>th:first-child {
-// border-top-left-radius: 15px;
-// //background-color: $background-green;
-// color: $background-black;
-// border: none;
-// }
 
 .table>tbody>tr>td,
 .table>tbody>tr>th,
@@ -303,13 +294,18 @@ color: $background-black !important;
 //*********** Backend Activity Log Page ****************
 
 #activity-log-page {
-  padding: 5px;
-  padding-right: 10px;
+  // padding: 5px;
+  // padding-right: 10px;
+  background-color: $background-green;
 }
 
 #activity-filter-sidebar {
   width: 200px;
   position: fixed;
+}
+
+#activity-log-body {
+  background-color: $background-green;
 }
 
 .padding-for-sidebar {
@@ -325,15 +321,28 @@ color: $background-black !important;
 }
 
 #fixed-header {
-  background-color: white;
+  background-color: $background-green;
+  color: $white-ish;
   border: none;
   padding-bottom: 6px;
+}
+
+#totalsRow > div > h2 {
+  font-weight: 900;
+}
+
+#totalsRow > div > h1 {
+  
 }
 
 #invisible-header {
   visibility: hidden;
   margin-bottom: 0px;
   border-bottom: 0px;
+}
+
+table#activity-list {
+  width: 99%;
 }
 
 .wide-margin {
@@ -355,8 +364,14 @@ color: $background-black !important;
   z-index: 9999;
 }
 
-.show-sidebar-index {
-  //z-index: 20000;
+#show-sidebar {
+  position: fixed;
+  cursor: pointer;
+}
+
+#hide-sidebar-button {
+  text-align: right;
+  cursor: pointer;
 }
 
 .dropdown-select-spacing {
@@ -364,5 +379,104 @@ color: $background-black !important;
 }
 
 .activity-log-header {
-  background-color: white;
+  background-color: $background-black;
+  color: $background-green;
+  border: $background-black;
 }
+
+.table>thead>tr>th {
+  border: none;
+}
+
+thead > tr {
+  z-index: 1;
+}
+
+.activity-table {
+   border-collapse: separate;
+   border: solid $background-black 1px;
+   //border-radius: 6px;
+   border-left: 0px;
+   border-top: 0px;
+   color: $dark-black;
+}
+.activity-table > thead:first-child > tr:first-child > th {
+    border-bottom: 0px;
+    border-top: solid $background-black 1px;
+}
+.activity-table td, .activity-table th {
+    border-left: 1px solid $background-black;
+    border-top: 1px solid $background-black;
+}
+.activity-table > :first-child > :first-child > :first-child {
+    border-top-left-radius: 6px;
+}
+.activity-table > :first-child > :first-child > :last-child {
+    border-top-right-radius: 6px;
+}
+.activity-table > :last-child > :last-child > :first-child {
+    border-bottom-left-radius: 0px;
+}
+.activity-table > :last-child > :last-child > :last-child {
+    border-bottom-right-radius: 0px;
+}
+
+#fixed-activity-log-header {
+  z-index: 1;
+}
+
+.navbar-fixed-bottom, .navbar-fixed-top {
+  z-index: 1;
+}
+
+.ui-datepicker { 
+  z-index: 9999 !important;
+}
+
+table#activity-list td.no-side-border {
+  border: none;
+  border-right: 0px;
+  border-left: solid 1px $background-black;
+  border-top: solid 1px $background-black;
+  border-bottom: solid 1px $background-black;
+  border-style-left: none;
+  border-style-right: none;
+  background-color: $lighter-black;
+  //font-weight: 900;
+  color: #B8B8B8;
+}
+
+.large-glyph {
+  font-size: 2em;
+}
+
+#home-button {
+  //color: $background-green;
+  top: 10px;
+  right: 35%;
+  position: relative;
+  background-color: $background-green;
+  border: solid 1px $background-black;
+}
+
+#home-button-div {
+  text-align: right;
+}
+
+.no-right-margin {
+  margin-right: 0px;
+}
+
+.sidebar-view-button {
+  color: $background-black;
+}
+
+#activity-table-body {
+  
+}
+
+
+
+
+
+
