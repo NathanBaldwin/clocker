@@ -143,12 +143,13 @@ form button:hover {
   border-right: solid 1px $white-ish;
   height: calc(100% - 40px);
   padding-right: 0px; 
+  padding-left: 40px;
 }
 
 #analyze-data-page-button {
   top: 15px;
   text-align: right;
-  right: 0px;
+  right: 36%;
   margin-bottom: 20px;
   position: relative;
   background-color: $background-green;
@@ -161,6 +162,7 @@ form button:hover {
 
 .data-button-padding {
   margin-right: -1%;
+  padding-top: 10px;
 }
 
 #sign-out {
@@ -216,6 +218,7 @@ form button:hover {
 #visitor-sign-in-page {
   height: 100%;
   background-color: $background-green;
+  padding-right: 30px;
 }
 
 input::-webkit-input-placeholder {
@@ -302,6 +305,17 @@ color: $background-black !important;
 #activity-filter-sidebar {
   width: 200px;
   position: fixed;
+  padding-right: 18px;
+  margin-top: 20px;
+  margin-right: 10px;
+  z-index: 9999;
+  height: calc(100% - 40px);
+  border-right: solid 1px #416600;
+}
+
+#start-date-picker, #before-date-picker {
+  cursor: pointer;
+  margin-top: 10px;
 }
 
 #activity-log-body {
@@ -309,7 +323,7 @@ color: $background-black !important;
 }
 
 .padding-for-sidebar {
- padding-left: 200px;
+ padding-left: 220px;
 }
 
 .padding-for-add-sidebar-button {
@@ -346,7 +360,7 @@ table#activity-list {
 }
 
 .wide-margin {
-  margin-left: 200px;
+  margin-left: 215px;
 }
 
 .thin-margin {
@@ -367,6 +381,8 @@ table#activity-list {
 #show-sidebar {
   position: fixed;
   cursor: pointer;
+  left: 15px;
+  top: 15px;
 }
 
 #hide-sidebar-button {
@@ -453,7 +469,7 @@ table#activity-list td.no-side-border {
 #home-button {
   //color: $background-green;
   top: 10px;
-  right: 35%;
+  right: 24%;
   position: relative;
   background-color: $background-green;
   border: solid 1px $background-black;
@@ -472,9 +488,51 @@ table#activity-list td.no-side-border {
 }
 
 #activity-table-body {
-  
+
 }
 
+.form-control {
+  padding-right: 30px;
+}
+
+.form-control + .glyphicon {
+  position: absolute;
+  right: 0;
+  padding: 18px 27px;
+}
+
+.extra-top-margin {
+  padding-top: 100px;
+}
+
+// .dropdown-toggle:active, .open .dropdown-toggle {
+//   background-color: $background-green !important; 
+//   color: $background-black !important;
+// }
+
+.btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .open>.dropdown-toggle.btn-default.focus, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
+  background-color: $background-green;
+}
+
+.btn-default:hover {
+  background-color: $background-green;
+}
+
+.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default {
+    color: #333;
+    background-color: $background-green;
+    border-color: #adadad;
+}
+
+.btn-default {
+    color: #333;
+    background-color: $background-green;
+    border-color: #adadad;
+}
+
+.btn-group {
+  background-color: $background-green;
+}
 
 
 

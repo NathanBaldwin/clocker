@@ -115,12 +115,13 @@ form button:hover {
 #visitor-sign-in-form {
   border-right: solid 1px #E3E3E3;
   height: calc(100% - 40px);
-  padding-right: 0px; }
+  padding-right: 0px;
+  padding-left: 40px; }
 
 #analyze-data-page-button {
   top: 15px;
   text-align: right;
-  right: 0px;
+  right: 36%;
   margin-bottom: 20px;
   position: relative;
   background-color: #5B8623;
@@ -130,7 +131,8 @@ form button:hover {
   text-align: right; }
 
 .data-button-padding {
-  margin-right: -1%; }
+  margin-right: -1%;
+  padding-top: 10px; }
 
 #sign-out {
   text-align: right; }
@@ -169,7 +171,8 @@ form button:hover {
 
 #visitor-sign-in-page {
   height: 100%;
-  background-color: #5B8623; }
+  background-color: #5B8623;
+  padding-right: 30px; }
 
 input::-webkit-input-placeholder {
   color: #262626 !important; }
@@ -238,13 +241,23 @@ input:-ms-input-placeholder {
 
 #activity-filter-sidebar {
   width: 200px;
-  position: fixed; }
+  position: fixed;
+  padding-right: 18px;
+  margin-top: 20px;
+  margin-right: 10px;
+  z-index: 9999;
+  height: calc(100% - 40px);
+  border-right: solid 1px #416600; }
+
+#start-date-picker, #before-date-picker {
+  cursor: pointer;
+  margin-top: 10px; }
 
 #activity-log-body {
   background-color: #5B8623; }
 
 .padding-for-sidebar {
-  padding-left: 200px; }
+  padding-left: 220px; }
 
 .padding-for-add-sidebar-button {
   padding-left: 30px; }
@@ -270,7 +283,7 @@ table#activity-list {
   width: 99%; }
 
 .wide-margin {
-  margin-left: 200px; }
+  margin-left: 215px; }
 
 .thin-margin {
   margin-left: 20px; }
@@ -286,7 +299,9 @@ table#activity-list {
 
 #show-sidebar {
   position: fixed;
-  cursor: pointer; }
+  cursor: pointer;
+  left: 15px;
+  top: 15px; }
 
 #hide-sidebar-button {
   text-align: right;
@@ -358,7 +373,7 @@ table#activity-list td.no-side-border {
 
 #home-button {
   top: 10px;
-  right: 35%;
+  right: 24%;
   position: relative;
   background-color: #5B8623;
   border: solid 1px #262626; }
@@ -371,5 +386,35 @@ table#activity-list td.no-side-border {
 
 .sidebar-view-button {
   color: #262626; }
+
+.form-control {
+  padding-right: 30px; }
+
+.form-control + .glyphicon {
+  position: absolute;
+  right: 0;
+  padding: 18px 27px; }
+
+.extra-top-margin {
+  padding-top: 100px; }
+
+.btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .open > .dropdown-toggle.btn-default.focus, .open > .dropdown-toggle.btn-default:focus, .open > .dropdown-toggle.btn-default:hover {
+  background-color: #5B8623; }
+
+.btn-default:hover {
+  background-color: #5B8623; }
+
+.btn-default.active, .btn-default:active, .open > .dropdown-toggle.btn-default {
+  color: #333;
+  background-color: #5B8623;
+  border-color: #adadad; }
+
+.btn-default {
+  color: #333;
+  background-color: #5B8623;
+  border-color: #adadad; }
+
+.btn-group {
+  background-color: #5B8623; }
 
 /*# sourceMappingURL=main.css.map */

@@ -293,6 +293,10 @@ $scope.activityHeader = {
     position: 'auto'
   };
 
+$scope.openGroup = function() {
+	event.stopPropagation();
+}
+
 
 
 
