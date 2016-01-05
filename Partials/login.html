@@ -3,6 +3,11 @@
 <div id="login-page">
 	<div class="wrapper">
 		<div class="login-container">
+
+			<div class="wrap center">
+ 				<div class="timer"></div>
+			</div>
+
 			<span class="logo-login"><i class="fa fa-picture-o"></i></span>
 			<h1 class="heading">Clocker</h1>
 			<form class="form">
@@ -12,16 +17,9 @@
 			</form>
 
 			<div>
-				<h5>New to Clocker? Click <a href="#/clocker/adminsignup">here</a> to get started in 5 seconds!</h5>
+				<h5>New to Clocker? Click <a href="#/clocker/adminsignup" class="underline">here</a> to get started in 5 seconds!</h5>
 			</div>
 			
-			<!-- ALERT BOX -->
-			<div id="alert" class="alert" role="alert">
-				<p ng-if="message">Message: <strong>{{ message }}</strong></p>
-  			<p ng-if="error">Error: <strong>{{ error }}</strong></p>
-     				<h4 id="alert-title">You are not logged in</h4>
-    				<p id="alert-detail"></p>
-			</div>
 		</div>
 	</div>
 </div>

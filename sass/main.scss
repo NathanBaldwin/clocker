@@ -54,16 +54,114 @@ input.dropdown-select {
 
 }
 
+// clock animation:
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.wrap {
+  width: 145px;
+  height: 145px;
+}
+
+.center {
+  margin: auto;
+  //position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Timer */
+.timer {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  position: relative;
+  margin: auto;
+
+ }
+.timer:after, .timer:before {
+  position: absolute;
+  content: "";
+  background-color: #fff;
+}
+.timer:after {
+  width: 40%;
+  height: 8px;
+  border-radius: 5px;
+  top: 50%;
+  left: 50%;
+  
+  -webkit-transform-origin: 4px 4px;
+     -moz-transform-origin: 4px 4px;
+          transform-origin: 4px 4px;
+  
+  -webkit-animation: minhand 2s linear infinite;
+     -moz-animation: minhand 2s linear infinite;
+          animation: minhand 2s linear infinite;
+}
+
+.timer:before {
+  width: 20%;
+  height: 8px;
+  border-radius: 5px;
+  top: 50%;
+  left: 50%;
+  
+  -webkit-transform-origin: 4px 4px;
+     -moz-transform-origin: 4px 4px;
+          transform-origin: 4px 4px;
+  
+  -webkit-animation: hrhand 8s linear infinite;
+     -moz-animation: hrhand 8s linear infinite;
+          animation: hrhand 8s linear infinite;
+}
+
+@-webkit-keyframes minhand {
+    0%{-webkit-transform:rotate(0deg)}
+    100%{-webkit-transform:rotate(360deg)}
+}
+@-moz-keyframes minhand {
+    0%{-moz-transform:rotate(0deg)}
+    100%{-moz-transform:rotate(360deg)}
+}
+@keyframes minhand {
+    0%{transform:rotate(0deg)}
+    100%{transform:rotate(360deg)}
+}
+
+@-webkit-keyframes hrhand {
+    0%{-webkit-transform:rotate(0deg)}
+    100%{-webkit-transform:rotate(360deg)}
+}
+@-moz-keyframes hrhand {
+    0%{-moz-transform:rotate(0deg)}
+    100%{-moz-transform:rotate(360deg)}
+}
+@keyframes hrhand {
+    0%{transform:rotate(0deg)}
+    100%{transform:rotate(360deg)}
+}
+
 // login splash page
 .wrapper {
-  background: #223749;
-  background: -webkit-linear-gradient(top left, #223749 0%, #223749 100%);
-  background: linear-gradient(to bottom right, #223749 0%, #223749 100%);
+  background: $background-green;
+  background: -webkit-linear-gradient(top left, $background-green 0%, $background-green 100%);
+  background: linear-gradient(to bottom right, $background-green 0%, $background-green 100%);
   position: absolute;
-  top: 50%;
+  top: 38%;
   left: 0;
   width: 100%;
-  height: 475px;
+  height: 600px;
   margin-top: -200px;
   overflow: hidden;
 }
@@ -76,7 +174,8 @@ input.dropdown-select {
 .login-container {
   max-width: 600px;
   margin: 0 auto;
-  padding: 80px 0;
+  padding: 20px 0;
+  padding-top: 65px;
   height: 400px;
   text-align: center;
 }
@@ -116,7 +215,7 @@ form input:hover {
 form input:focus {
   background-color: white;
   width: 300px;
-  color: #223749;
+  color: $background-green;
 }
 form button {
   -webkit-appearance: none;
@@ -124,7 +223,7 @@ form button {
   background-color: white;
   border: 0;
   padding: 10px 15px;
-  color: #223749;
+  color: $background-green;
   border-radius: 3px;
   width: 250px;
   margin-right: 4px;
@@ -137,11 +236,20 @@ form button:hover {
   background-color: #4E5F6D;
 }
 
+.underline {
+  text-decoration: underline;
+  color: $background-black;
+}
+
 //********* VISITOR SIGN-IN PAGE ********
+
+.center-button {
+  text-align: center;
+}
 
 #visitor-sign-in-form {
   border-right: solid 1px $white-ish;
-  height: calc(100% - 40px);
+  height: calc(100% - 100px);
   padding-right: 0px; 
   padding-left: 40px;
 }
@@ -189,10 +297,11 @@ form button:hover {
 
 .user-selection {
   padding-left: 15px;
+  text-align: left;
 }
 
 .activity-selection {
-  margin-top: 0px;
+  //margin-top: 0px;
   margin-right: 3%;
 }
 
@@ -342,11 +451,11 @@ color: $background-black !important;
 }
 
 #totalsRow > div > h2 {
-  font-weight: 900;
+  font-weight: 100;
 }
 
 #totalsRow > div > h1 {
-  
+  font-weight: 100;
 }
 
 #invisible-header {

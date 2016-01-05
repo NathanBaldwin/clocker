@@ -34,7 +34,7 @@
 						  </ul>
 						</div>
 					</div>
-					<div class="col-sm-7">
+					<div class="col-sm-8">
 						<h4 class="user-selection" ng-model="group">{{group}}</h4>	
 					</div>
 				</div>
@@ -57,7 +57,7 @@
 						  </ul>
 						</div>
 					</div>
-					<div class="col-sm-6 col-sm-offset-3">
+					<div class="col-sm-7 col-sm-offset-2">
 						<h4 class="user-selection activity-selection" ng-model="activity">{{activity}}</h4>	
 					</div>
 				</div>
@@ -85,7 +85,7 @@
 						<td>{{visitor.inFormatted}}</td>
 						<td>{{visitor.activity}}</td>
 						<td>{{visitor.group}}</td>
-						<td><button class="btn btn-xs important-btn-sm" id="{{visitor.$id}}" ng-click="signOut()">Sign Out</button></td>
+						<td class="center-button"><button class="btn btn-xs important-btn-sm" id="{{visitor.$id}}" ng-click="signOut()">Sign Out</button></td>
 						
 					</tr>
 				</table>
@@ -111,7 +111,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" ng-click="createNewActivity()">Yes - sign me in!</button>
+            <button type="button" class="btn btn-default" ng-click="createNewActivity()">Yes - sign me in!</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -126,18 +126,18 @@
 	            
 				      <div>
 				      	<h4>Please enter your name:</h4>
-				      	<div>
-									<input type="text" placeholder="first name" size="50" ng-model="firstName">
+				      	<div class="form-group">
+									<input class="form-control" type="text" placeholder="First Name" size="50" ng-model="firstName">
 								</div>
 								<div>
-									<input type="text" placeholder="last name" size="50" ng-model="lastName">
+									<input class="form-control" type="text" placeholder="Last Name" size="50" ng-model="lastName">
 								</div>
 				      </div>
 					    
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" ng-click="createNewVisitor()">Sign me in!</button>
+            <button type="button" class="btn btn-default" ng-click="createNewVisitor()">Sign me in!</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -152,14 +152,14 @@
 	            
 				      <div>
 				      	<h4>Please enter your group:</h4>
-				      	<div>
-									<input type="text" placeholder="first name" size="50" ng-model="newGroupName">
+				      	<div class="form-group">
+									<input class="form-control" type="text" placeholder="Group Name..." size="50" ng-model="newGroupName">
 								</div>
 					    
           		</div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" ng-click="createNewGroup()">Save</button>
+            <button type="button" class="btn btn-default" ng-click="createNewGroup()">Save</button>
            </div>
           </div>
         </div><!-- /.modal-content -->
@@ -175,13 +175,13 @@
 	            
 				      <div>
 				      	<h4>Please enter your event/activity:</h4>
-					      <div>
-									<input type="text" placeholder="first name" size="50" ng-model="newActivityName">
+					      <div class="form-group">
+									<input class="form-control" type="text" placeholder="Event or Activity..." size="50" ng-model="newActivityName">
 								</div>
           		</div>
 	          <div class="modal-footer">
 	            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	            <button type="button" class="btn btn-primary" ng-click="createNewActivityName()">Save</button>
+	            <button type="button" class="btn btn-default" ng-click="createNewActivityName()">Save</button>
             </div>
           </div>
         </div><!-- /.modal-content -->

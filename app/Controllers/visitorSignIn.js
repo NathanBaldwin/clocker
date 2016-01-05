@@ -60,6 +60,8 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
 	$scope.createNewGroup = function() {
 		groupsRef.push($scope.newGroupName);
 		$scope.group = $scope.newGroupName;
+
+		$("#createNewGroupModal").modal('hide');
 	}
 
 	$scope.activity = "";
@@ -81,6 +83,7 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
 		console.log("you clicked create new activity!!!");
 		activityNamesRef.push($scope.newActivityName);
 		$scope.activity = $scope.newActivityName;
+		$("#enterNewActivityModal").modal('hide');
 	}
 
 
@@ -143,7 +146,16 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
     // sets new activity data object to the firebase database
     activityLogRef.push(newActivity);
 
+    $scope.group = "";
+    $scope.activity = "";
+    $scope.email = "";
+    $scope.newGroupName = "";
+    $scope.newActivityName = "";
+    $scope.lastName = "";
+    $scope.firstName = "";
+    $("#noMatchModal").modal('hide');
     });
+
     
   };
 
@@ -174,6 +186,15 @@ app.controller('visitorSignIn', ["$scope", "Auth", "$location", "$firebaseArray"
   
     // sets new activity data object to the firebase database
     activityLogRef.push(newActivity);
+
+    $scope.group = "";
+    $scope.activity = "";
+    $scope.email = "";
+    $scope.newGroupName = "";
+    $scope.newActivityName = "";
+    $scope.lastName = "";
+    $scope.firstName = "";
+    $("#foundMatchModal").modal('hide');
   
   };
 
