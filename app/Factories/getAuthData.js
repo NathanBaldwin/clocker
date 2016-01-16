@@ -1,7 +1,7 @@
 app.factory('getAuthData', [
   function() {
 
-  	console.log("I see getAuthData!!");
+
 
   	var uid = "";
     var filteredResults = [];
@@ -12,15 +12,7 @@ app.factory('getAuthData', [
     	},
     	getAdminUid: function() {
     		return uid;
-    	},
-      setFilteredResults: function(filteredArray) {
-        filteredResults = filteredArray;
-        console.log("filteredResults: ", filteredResults);
-      },
-      getFilteredResults: function() {
-        return filteredResults;
-      }
-
+    	}
     }
 
   }

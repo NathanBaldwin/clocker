@@ -1,14 +1,25 @@
-app.controller('backend-activity', ["$scope", "Auth", "$location", "$firebaseArray", "getAuthData", "$firebaseObject",
-  function($scope, Auth, $location, $firebaseArray, getAuthData, $firebaseObject) {
-  	console.log("I see backend-activity controller!");
+app.controller('backend-activity',
+  ["$scope", "getAuthData", "$firebaseArray", "$firebaseObject",
+  function($scope, getAuthData, $firebaseArray, $firebaseObject) {
 
+  //creating new reference to the clocker database at firebase.com:
   var ref = new Firebase("https://clocker.firebaseio.com/");
+
+  //use the Clocker firebase reference to retrieve
 	var currentAuthData = ref.getAuth();
 	var adminUid = currentAuthData.uid;
-	var pastVisitorsRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/visitors");
-	var activityLogRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/activityLog");
-	var groupsRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/groups");
-	var activityNamesRef = new Firebase("https://clocker.firebaseio.com/" + adminUid + "/activityNames");
+
+
+	var pastVisitorsRef = new Firebase("https://clocker.firebaseio.com/"
+                                      + adminUid + "/visitors");
+	var activityLogRef = new Firebase("https://clocker.firebaseio.com/"
+                                      + adminUid + "/activityLog");
+
+	var groupsRef = new Firebase("https://clocker.firebaseio.com/"
+                                      + adminUid + "/groups");
+
+	var activityNamesRef = new Firebase("https://clocker.firebaseio.com/"
+                                      + adminUid + "/activityNames");
 	console.log("adminUid", adminUid);
 
 
