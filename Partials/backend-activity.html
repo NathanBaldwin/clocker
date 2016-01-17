@@ -8,14 +8,6 @@
 			<a id="hide-sidebar-button" class="col-sm-6 col-sm-offset-6 sidebar-view-button" ng-click="hideSidebar()"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Filter</a>
 		</div>
 		
-		<!-- <div class="row">
-			<div class="col-sm-12">
-				<label for="starting-date">Starting on:</label>
-				<input id="start-date-picker" class="form-control dropdown-select" type="text" ng-model="startDateText">
-				<span class="glyphicon glyphicon-chevron-left"></span>
-				
-			</div>
-		</div> -->
 		<div class="row extra-top-margin">
 			<div class="col-sm-12 ">
 			  <input id="start-date-picker" class="form-control dropdown-select" type="text" placeholder="Starting on..." ng-model="startDateText" />
@@ -23,15 +15,6 @@
 			</div>
 		</div>
 		
-
-		<!-- <div class="row">
-			<div class="col-sm-12">
-				<label for="before-date">Before:</label>
-				<input id="before-date-picker" class="form-control dropdown-select" type="text" ng-model="beforeDateText"/>
-				<i class="glyphicon glyphicon-calendar"></i>
-			</div>
-		</div> -->
-
 		<div class="row">
 			<div class="col-sm-12">
 			  <input id="before-date-picker" class="form-control dropdown-select" type="text" placeholder="Before..." ng-model="beforeDateText"/>
@@ -49,9 +32,6 @@
 	<!-- Group Multi-Select -->
 	<div class="row">
 		<div class="col-sm-12">
-      <!-- <div id="groupSelect" class="btn-group" ng-class="{open: groupOpen}">
-        
-        <button class="btn btn-default dropdown-toggle dropdown-select dropdown-select-spacing" ng-click="groupOpen=!groupOpen">Groups<span class="caret"></span></button> -->
 
         <div id="groupSelect" class="btn-group">
         
@@ -194,9 +174,9 @@
 						<tr ng-repeat-end="" >
 							<td>{{activity.firstName}} {{activity.lastName}}</td>
 							<td in time-in="{{activity.in}}"></td>
-							<!-- <td in timeInFormatted="{{activity.inFormatted}}">{{activity.inFormatted}}</td> -->
+							
 							<td out time-out="{{activity.out}}"></td>
-							<!-- <td out time-out="{{activity.outFormatted}}">{{activity.outFormatted}}</td> -->
+							
 							<td>{{activity.activity}}</td>
 							<td>{{activity.group}}</td>	
 							<td total-time time-in="{{activity.in}}" time-out="{{activity.out}}"></td>	

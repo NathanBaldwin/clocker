@@ -2,131 +2,112 @@ app.controller('backend-activity',
   ["$scope", "getAuthData", "$firebaseArray", "$firebaseObject",
   function($scope, getAuthData, $firebaseArray, $firebaseObject) {
 
-  //creating new reference to the clocker database at firebase.com:
-  var ref = new Firebase("https://clocker.firebaseio.com/");
+  //get auth data for logged in user:
+  var adminUid = getAuthData.getAdminUid();
 
-  //use the Clocker firebase reference to retrieve
-	var currentAuthData = ref.getAuth();
-	var adminUid = currentAuthData.uid;
+  //function to construct references to access user's data stored
+  //one level deep in Firebase:
+  var createFbRef = function(fbKeyForData) {
+   return new Firebase(getAuthData.ref() + adminUid + fbKeyForData);
+  }
 
+  //Create references which will be used to retrieve data stored
+  //in Firebase in each of the keys specified in function parameters below:
+	var pastVisitorsRef = createFbRef("/visitors");
+	var activityLogRef = createFbRef("/activityLog");
+	var groupsRef = createFbRef("/groups");
+	var activityNamesRef = createFbRef("/activityNames");
 
-	var pastVisitorsRef = new Firebase("https://clocker.firebaseio.com/"
-                                      + adminUid + "/visitors");
-	var activityLogRef = new Firebase("https://clocker.firebaseio.com/"
-                                      + adminUid + "/activityLog");
-
-	var groupsRef = new Firebase("https://clocker.firebaseio.com/"
-                                      + adminUid + "/groups");
-
-	var activityNamesRef = new Firebase("https://clocker.firebaseio.com/"
-                                      + adminUid + "/activityNames");
-	console.log("adminUid", adminUid);
-
-
+  //retrieve activity log data and convert object of objects to an array of objects
+  //using the $firebaseArray method. Then store array to a variable on scope.
 	$scope.activityLogArray = $firebaseArray(activityLogRef);
 
+  //deferred action waits for activityLogArray to load. On load, array is reversed
+  //in order to display most recent logged events at top of activity table:
 	$scope.activityLogArray.$loaded().then(function(returnedActivityArray) {
 		$scope.allActivitiesArray = returnedActivityArray.reverse();
+  })
 
-		})
-
+  //user's group list stored in array:
 	$scope.groupsArray = $firebaseArray(groupsRef);
 
+  //user's activities stored in array:
 	$scope.activityNamesArray = $firebaseArray(activityNamesRef);
 
+  $scope.filteredResults = [];
+  $scope.filteredSum = 0;
+
+  $scope.$watch(function() {
+    //console.log("new filteredResults", $scope.filteredResults);
+
+    //console.log("event:", event);
+    
+    var sum = 0;
+
+    //total hours calc:
+
+    // var filteredSecsArray = _.pull($scope.filteredResults.totalSecs, undefined);
+    // console.log("filteredSecsArray", filteredSecsArray);
+
+    $scope.filteredResults.forEach(function (r) {
+      if (r.totalSecs === undefined) {
+      } else {
+      sum += r.totalSecs;
+      }
+    });
+
+    $scope.filteredSum = Number(Math.round((sum / 3600)+'e2') +'e-2');
+    
+    console.log("$$scope.filteredSum", $scope.filteredSum);
+
+    //total events calc:
+    var allEvents = $scope.filteredResults.map(function(activity) {
+      return activity.activity;
+    })
+
+    //console.log("allEvents", allEvents);
+    var uniqueEvents = _.uniq(allEvents);
+    // console.log("uniqueEvents", uniqueEvents);
+
+    $scope.eventsTotal = uniqueEvents.length;
+
+    //total groups calc:
+
+    var allGroups = $scope.filteredResults.map(function(activity) {
+      return activity.group;
+    })
+
+    //console.log("allGroups", allGroups);
+    var uniqueGroups = _.uniq(allGroups);
+
+    $scope.groupTotal = uniqueGroups.length;
+
+    //total people calc:
+
+    var allPeople = $scope.filteredResults.map(function(activity) {
+
+      var firstName = activity.firstName;
+      var lastName = activity.lastName;
+      var fullName = firstName + " " + lastName;
+
+      return fullName;
+    })
+
+    var uniquePeople = _.uniq(allPeople);
+    // console.log("uniquePeople", uniquePeople);
+    $scope.peopleTotal = uniquePeople.length;
+
+  })
+  //***************Date-Picker functionality*********************************
+
+  //start date is empty string by default:
 	$scope.startDateText = "";
 
-	//Start-date Picker functionality:
-
-	var startDate = "";
-
-	var convertDate = function(oldFormat) {
-
-		return $.datepicker.formatDate("yy-mm-dd", oldFormat).toString();
-
-	};
-
-
-	$scope.filteredResults = [];
-	$scope.filteredSum = 0;
-
-	
-
-	$scope.$watch(function() {
-  	//console.log("new filteredResults", $scope.filteredResults);
-
-  	//console.log("event:", event);
-
-  	
-
-  	
-  	var sum = 0;
-
-  	//total hours calc:
-
-  	// var filteredSecsArray = _.pull($scope.filteredResults.totalSecs, undefined);
-  	// console.log("filteredSecsArray", filteredSecsArray);
-
-  	$scope.filteredResults.forEach(function (r) {
-	  	if (r.totalSecs === undefined) {
-	  	} else {
-			sum += r.totalSecs;
-			}
-
-		});
-
-		$scope.filteredSum = Number(Math.round((sum / 3600)+'e2') +'e-2');
-		
-
-
-
-
-		console.log("$$scope.filteredSum", $scope.filteredSum);
-
-
-
-
-
-		//total events calc:
-		var allEvents = $scope.filteredResults.map(function(activity) {
-			return activity.activity;
-		})
-
-		//console.log("allEvents", allEvents);
-		var uniqueEvents = _.uniq(allEvents);
-		// console.log("uniqueEvents", uniqueEvents);
-
-		$scope.eventsTotal = uniqueEvents.length;
-
-		//total groups calc:
-
-		var allGroups = $scope.filteredResults.map(function(activity) {
-			return activity.group;
-		})
-
-		//console.log("allGroups", allGroups);
-		var uniqueGroups = _.uniq(allGroups);
-
-		$scope.groupTotal = uniqueGroups.length;
-
-		//total people calc:
-
-		var allPeople = $scope.filteredResults.map(function(activity) {
-
-			var firstName = activity.firstName;
-			var lastName = activity.lastName;
-			var fullName = firstName + " " + lastName;
-
-			return fullName;
-		})
-
-		var uniquePeople = _.uniq(allPeople);
-		// console.log("uniquePeople", uniquePeople);
-		$scope.peopleTotal = uniquePeople.length;
-
-
-
-	})
+  //Convert unformatted moment (ie. Tue Dec 22 2015 00:00:00 GMT-0600 (CST))
+  //to more readable format (ie. 2015-12-22), which is used to display user's selected date:
+  var convertDate = function(oldFormat) {
+    return $.datepicker.formatDate("yy-mm-dd", oldFormat).toString();
+  };
 
 
 	$(function() {
@@ -261,7 +242,6 @@ app.controller('backend-activity',
 $scope.closeDropdowns = function() {
 	//console.log("you clicked on the body!!");
 	console.log("event", event.target.id);
-
 }
 
 //****** Sidebar hide/show functionality: *********
@@ -307,17 +287,5 @@ $scope.activityHeader = {
 $scope.openGroup = function() {
 	event.stopPropagation();
 }
-
-
-
-
-
-
-
-
-
-
-	
-
 
 }]);
