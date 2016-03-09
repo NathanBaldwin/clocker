@@ -1,3 +1,3 @@
-# Pinterest
+# Clocker
 
-My project for NSS front end course.
+Front-End Capstone project for Nashville Software School
