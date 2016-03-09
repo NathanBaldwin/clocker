@@ -1,3 +1,4 @@
 .sass-cache
 public/lib/bower_components
 public/lib/node_modules
+public/lib/.sass-cache
