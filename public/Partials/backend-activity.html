@@ -1,0 +1,191 @@
+<section id="activity-log-page" class="inherit-height">
+	<div id="space-for-add-sidebar-button" class="hidden">
+		<a id="show-sidebar" class="sidebar-view-button" ng-click="showSidebar()">Filter<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+		
+	</div>
+	<div id="activity-filter-sidebar" class="container-fluid form-group inherit-height">
+		<div class="row">
+			<a id="hide-sidebar-button" class="col-sm-6 col-sm-offset-6 sidebar-view-button" ng-click="hideSidebar()"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Filter</a>
+		</div>
+		
+		<div class="row extra-top-margin">
+			<div class="col-sm-12 ">
+			  <input id="start-date-picker" class="form-control dropdown-select" type="text" placeholder="Starting on..." ng-model="startDateText" />
+			  <i id="start-calendar-glyph"class="glyphicon glyphicon-calendar"></i>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+			  <input id="before-date-picker" class="form-control dropdown-select" type="text" placeholder="Before..." ng-model="beforeDateText"/>
+			  <i class="glyphicon glyphicon-calendar"></i>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<input type="text" class="form-control dropdown-select dropdown-select-spacing" placeholder="Search Name..." ng-model="searchName">
+			</div>
+		</div>
+		
+
+	<!-- Group Multi-Select -->
+	<div class="row">
+		<div class="col-sm-12">
+
+        <div id="groupSelect" class="btn-group">
+        
+        <button class="btn btn-default dropdown-toggle dropdown-select dropdown-select-spacing" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Groups<span class="caret"></span></button>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li>
+          	<a ng-click="checkAllGroups(); openGroup()">
+          		<i class="glyphicon glyphicon-ok-circle"></i>  Check All
+          	</a>
+          </li>
+          <li>
+          	<a ng-click="selectedGroups=[]; openGroup()">
+          		<i class="glyphicon glyphicon-remove-circle"></i>  Uncheck All
+          	</a>
+          </li>
+          <li class="divider"></li>
+          <li ng-repeat="group in groupsArray">
+          	<a ng-click="setSelectedGroup(); openGroup()">
+          		<span class="dropdown-spacing">{{group.$value}}</span>
+          		<span ng-class="isChecked(group.$value)"></span>
+          	</a>
+           </li>
+        </ul>
+			</div>
+		</div>
+	</div>
+		<!-- Event/Activity Multi-Select -->
+	<div class="row">
+		<div class="col-sm-12">
+      <div id="activitySelect" class="btn-group" >
+        
+        <button class="btn btn-default dropdown-toggle dropdown-select dropdown-select-spacing"data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Events/Activities<span class="caret"></span></button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li>
+          	<a ng-click="checkAllActivities(); openGroup()">
+          		<i class="glyphicon glyphicon-ok-circle"></i>  Check All
+          	</a>
+          </li>
+          <li>
+          	<a ng-click="selectedActivities=[]; openGroup()">
+          		<i class="glyphicon glyphicon-remove-circle"></i>  Uncheck All
+          	</a>
+          </li>
+          <li class="divider"></li>
+          <li ng-repeat="activityName in activityNamesArray">
+          	<a ng-click="setSelectedActivity(); openGroup()">
+          		<span class="dropdown-spacing">{{activityName.$value}}</span>
+          		<span ng-class="activityIsChecked(activityName.$value)"></span>
+          	</a>
+           </li>
+        </ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<section id="activity-log-body" class="padding-for-sidebar">
+			<div id="fixed-header" class="navbar navbar-default navbar-fixed-top wide-margin">
+				<div class="container-fluid">
+				<div class="row">
+					<div id="home-button-div" class="col-sm-1 col-sm-offset-11">
+						<a id="home-button" href="#/clocker/visitorsignin/" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+					</div>
+				</div>
+
+				<div id="totalsRow" class="row">
+					<div class="col-sm-3">
+						<h2>People:</h2>
+						<h1 ng-model="peopleTotal">{{peopleTotal}}</h1>
+					</div>
+					<div class="col-sm-3">
+						<h2>Hours:</h2>
+						<h1 ng-model="filteredSum">{{filteredSum}}</h1>
+					</div>
+					<div class="col-sm-3">
+						<h2>Groups:</h2>
+						<h1 ng-model="groupTotal">{{groupTotal}}</h1>
+					</div>
+					<div class="col-sm-3">
+						<h2>Activities:</h2>
+						<h1 ng-model="eventsTotal">{{eventsTotal}}</h1>
+					</div>
+				</div>
+	</div>
+
+			</div>
+			</div>
+
+			<div id="invisible-header" class="navbar navbar-default wide-margin">
+				<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-2 col-sm-offset-10">
+						<a href="#/clocker/visitorsignin/" class="btn btn-default btn-xs backend-link">Visitor Sign In</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<h2>People:</h2>
+						<h1 ng-model="peopleTotal">{{peopleTotal}}</h1>
+					</div>
+					<div class="col-sm-3">
+						<h2>Hours:</h2>
+						<h1 ng-model="filteredSum">{{filteredSum}}</h1>
+					</div>
+					<div class="col-sm-3">
+						<h2>Groups:</h2>
+						<h1 ng-model="groupTotal">{{groupTotal}}</h1>
+					</div>
+					<div class="col-sm-3">
+						<h2>Activities:</h2>
+						<h1 ng-model="eventsTotal">{{eventsTotal}}</h1>
+					</div>
+				</div>
+			</div>
+			</div>
+		
+			<div class="row no-right-margin">
+
+
+
+			<div class="col-sm-12">
+				<table float-thead="activityHeader" ng-model="varForReflowWatch" id="activity-list" class="table table-striped table-hover table-responsive activity-table">
+					<thead id="fixed-activity-log-header"class="activity-log-header">
+						<tr class="border-radius">
+							<th>Name</th>
+							<th>Time In</th>
+							<th>Time Out</th>
+							<th>Event</th>
+							<th>Group</th>
+							<th>Total Time</th>
+						</tr>
+					</thead>
+					<tbody id="activity-table-body">
+						<tr ng-repeat-start="activity in filteredResults = (allActivitiesArray | afterDateFilter: selectedStart : startDateText | beforeDateFilter: selectedEnd : beforeDateText | groupFilter: selectedGroups | activityFilter: selectedActivities | filterBy: ['firstName + lastName']: searchName)" ng-if="compareActivities(activity)">
+							
+							<td class="no-side-border" colspan="6">{{activity.day}}</td>
+
+						</tr>
+						<tr ng-repeat-end="" >
+							<td>{{activity.firstName}} {{activity.lastName}}</td>
+							<td in time-in="{{activity.in}}"></td>
+							
+							<td out time-out="{{activity.out}}"></td>
+							
+							<td>{{activity.activity}}</td>
+							<td>{{activity.group}}</td>	
+							<td total-time time-in="{{activity.in}}" time-out="{{activity.out}}"></td>	
+	        	</tr>
+					</tbody>
+				</table>
+				</div>
+			</div>
+
+		</section>
+	
+	</section>

@@ -1,0 +1,189 @@
+
+	
+	<div class="container-fluid" id="visitor-sign-in-page">
+		<div class="row inherit-height">
+		<div class="row data-button-padding">
+			<div  class="col-sm-1 col-sm-offset-11 right-align">
+				<a id="analyze-data-page-button" href="#/clocker/backend/activity/" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span></a>
+			</div>
+		</div>
+			<!-- visitor sign in form start-->
+			<div class="col-sm-4" id="visitor-sign-in-form">
+				<h1 class="visitor-page-heading">Sign In</h1>
+				<div class="row">
+					<div class="col-sm-10 form-group">
+						<input type="text" class="form-control dropdown-select" placeholder="Enter email..." size="50" ng-model="email">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4">
+		       <div class="form-group btn-group">
+						  <button type="button" class="btn dropdown-select dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    Select Group <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu">
+						    <li ng-repeat="group in groupsArray">
+		            	<a ng-click="setSelectedGroup()">
+		            		<span class="dropdown-spacing">{{group.$value}}</span>
+		            		
+		            	</a>
+		             </li>
+						    
+						    <li role="separator" class="divider"></li>
+						    <li><a ng-click="enterNewGroupName()">Other...</a></li>
+						  </ul>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<h4 class="user-selection" ng-model="group">{{group}}</h4>	
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+		       <div class="form-group btn-group">
+						  <button type="button" class="btn dropdown-select dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    Select Event/Activity <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu">
+						    <li ng-repeat="activityName in activityNamesArray">
+		            	<a ng-click="setSelectedActivity()">
+		            		<span class="dropdown-spacing">{{activityName.$value}}</span>
+		            		
+		            	</a>
+		             </li>
+						    
+						    <li role="separator" class="divider"></li>
+						    <li><a ng-click="enterNewActivityName()">Other...</a></li>
+						  </ul>
+						</div>
+					</div>
+					<div class="col-sm-7 col-sm-offset-2">
+						<h4 class="user-selection activity-selection" ng-model="activity">{{activity}}</h4>	
+					</div>
+				</div>
+
+				<button class="btn" id="important-button" ng-click="findVisitor()">Sign In</button>
+			</div>
+			<!-- visitor sign in form end -->
+
+			<div class="col-sm-8 sign-out-margins">
+				<div >
+					<h1 class="visitor-page-heading" id="sign-out">Sign Out</h1>
+				</div>
+
+				<!-- <div class="panel panel-default"> -->
+					<table class="table table-striped table-hover table-responsive table-curved" id="visitor-log-table">
+					<tr id="table-header">
+						<th>Name</th>
+						<th>Time In</th>
+						<th>Event</th>
+						<th>Group</th>
+						<th></th>
+					</tr>
+					<tr ng-repeat="visitor in currentVisitorsArray | filter: visitor.signedIn = true">
+						<td>{{visitor.firstName}} {{visitor.lastName}}</td>
+						<td>{{visitor.inFormatted}}</td>
+						<td>{{visitor.activity}}</td>
+						<td>{{visitor.group}}</td>
+						<td class="center-button"><button class="btn btn-xs important-btn-sm" id="{{visitor.$id}}" ng-click="signOut()">Sign Out</button></td>
+						
+					</tr>
+				</table>
+			<!-- </div> -->
+				
+			</div>
+		</div>
+	</div>
+
+<!-- found match modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="foundMatchModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            <div ng-repeat="name in match">
+					      <div>
+					      	<h4>Are you {{name.firstName}} {{name.lastName}}?</h4>
+					      </div>
+					    
+					    </div>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" ng-click="createNewActivity()">Yes - sign me in!</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+   <!-- No match found modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="noMatchModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            
+				      <div>
+				      	<h4>Please enter your name:</h4>
+				      	<div class="form-group">
+									<input class="form-control" type="text" placeholder="First Name" size="50" ng-model="firstName">
+								</div>
+								<div>
+									<input class="form-control" type="text" placeholder="Last Name" size="50" ng-model="lastName">
+								</div>
+				      </div>
+					    
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" ng-click="createNewVisitor()">Sign me in!</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Create New Group Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="createNewGroupModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            
+				      <div>
+				      	<h4>Please enter your group:</h4>
+				      	<div class="form-group">
+									<input class="form-control" type="text" placeholder="Group Name..." size="50" ng-model="newGroupName">
+								</div>
+					    
+          		</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" ng-click="createNewGroup()">Save</button>
+           </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Create New Activity/Event Type Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="enterNewActivityModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            
+				      <div>
+				      	<h4>Please enter your event/activity:</h4>
+					      <div class="form-group">
+									<input class="form-control" type="text" placeholder="Event or Activity..." size="50" ng-model="newActivityName">
+								</div>
+          		</div>
+	          <div class="modal-footer">
+	            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	            <button type="button" class="btn btn-default" ng-click="createNewActivityName()">Save</button>
+            </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
