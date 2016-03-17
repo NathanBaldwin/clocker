@@ -10,7 +10,7 @@ Built using JavaScript, AngularJS, Bootstrap, Firebase, Moment.js and deployed v
 
 This version of Clocker is a prototype, and is currently being cleaned up, commented, and refactored. Visit my clocker 2.0 repository to see current progress.
 
-##How the app works:
+##How It Works:
 
 There currently two main views: the sign in/sign out view and the 'backend' view.
 
