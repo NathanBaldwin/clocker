@@ -11,8 +11,10 @@ app.controller('login', ["$scope", "$location", "$firebaseAuth",
 
       //calling Firebase's authWithPassword method and passing it user's specified email and password to start authentication process:
 			ref.authWithPassword({
-	  		email    : $scope.email,
-	  		password : $scope.password
+	  		email    : "howdy@me.com",
+        //$scope.email,
+	  		password : "yo"
+        //$scope.password
 			},
       function(error, authData) {
         //if authentication fails, error message is returned from Firebase and handeled here:
