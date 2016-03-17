@@ -6,7 +6,7 @@ Clocker is the tool I wish existed during my time in the nonprofit world. This t
 
 Built using JavaScript, AngularJS, Bootstrap, Firebase, Moment.js and deployed via Digital Ocean.
 
-## Note:
+### Note:
 
 This version of Clocker is a prototype, and is currently being cleaned up, commented, and refactored. Visit my clocker 2.0 repository to see current progress.
 
@@ -26,7 +26,7 @@ If the individual has signed in previously, the app recognizes their email addre
 
 IF the individual is new, they are asked to enter their name, and are added to the database before being 'signed in' with a timestamp.
 
-###Backend View:
+###Visit the Backend View to Filter and Segment Your data!
 
 Click on the button in the top right of the sign in/sign out view to navigate to the backend view.
 
