@@ -24,7 +24,7 @@ Upon clicking 'Sign In', the app searches the database to determine whether or n
 
 If the individual has signed in previously, the app recognizes their email address and signs them in, creating a time stamp, and listing them on the right side of the screen.
 
-IF the individual is new, they are asked to enter their name, and are added to the database before being 'signed in' with a timestamp.
+If the individual is new, they are asked to enter their name, and are added to the database before being 'signed in' with a timestamp.
 
 ###Visit the Backend View to Filter and Segment Your data!
 
